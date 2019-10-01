@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <h1 *ngIf="renameGroupFlag === false" (click)="renameGroup()">{{group}}</h1>
+      <div *ngIf="renameGroupFlag === true" class="input-group">
+        <input #writeName type="text" class="form-control" placeholder="{{group}}"
+          aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+        <div class="input-group-append" id="button-addon4">
+          <button class="btn btn-outline-secondary" type="button" (click)="renameOK(writeName.value)">OK</button>
+          <button class="btn btn-outline-secondary" type="button" (click)="renameCancel()">CANCEL</button>
+        </div>
+      </div>
+    </div>
+    <div class="col text-right">
+      <button class="btn btn-success btn-lg">SAVE</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button *ngIf="addWordFlag === false" type="button" class="btn btn-outline-primary btn-sm"
+        (click)="addWordClick()">Add new word</button>
+      <div *ngIf="addWordFlag === true" class="row">
+        <div class="col">
+          <input #newWord type="text" class="form-control" placeholder="Word">
+        </div>
+        <div class="col">
+          <input #newMean type="text" class="form-control" placeholder="Meaning">
+        </div>
+        <input class="btn btn-warning" type="submit" (click)="addWordOk(newWord.value,newMean.value)" value="Confirm">
+        <input class="btn btn-secondary" type="reset" (click)="addWordCancel()" value="Cancel">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Word</th>
+            <th scope="col">Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let word of words; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{word.word}}</td>
+            <td>{{word.mean}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
