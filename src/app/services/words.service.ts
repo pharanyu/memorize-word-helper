@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { EventEmitter } from 'events';
+import { HttpClient } from '@angular/common/http';
 
 import { WORDSDB } from './mock-wordsDB';
 import { Word } from './word';
@@ -14,7 +15,7 @@ export class WordsService {
   words: Word[] = []; // store list words of current group
   group: string;      // store current group
 
-  constructor(private groupService: GroupService) { }
+  constructor(private groupService: GroupService, private http: HttpClient) { }
 
   /** Quary list words of current group from DataBase */
   getWordsFromActiveGroup(): Observable<Word[]> {

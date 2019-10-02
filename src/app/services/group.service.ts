@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {of, Observable} from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { GROUPS } from './mock-groups';
 import { WORDSDB } from './mock-wordsDB';
@@ -16,13 +17,14 @@ export class GroupService {
   private activeGroup: string;                              // store current active group
   groupUpdated: EventEmitter<string> = new EventEmitter();  // store emitter for group changing
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   /** Get groups from Server */
-  getGroups(): string[] {
+  getGroups(): Observable<string[]> {
     WORDSDB.forEach(word => this.groups.push(word.group));  // read group name of each element in DB
     this.groups = [...new Set(this.groups)];                // remove duplicate group name
-    return this.groups;                                     // return list of groups (no duplicate name)
+    return of(this.groups);                                     // return list of groups (no duplicate name)
+
   }
 
   /** Get current active group */

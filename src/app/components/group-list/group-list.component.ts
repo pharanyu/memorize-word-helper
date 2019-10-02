@@ -16,7 +16,11 @@ export class GroupListComponent implements OnInit {
 
   ngOnInit() {
     this.activeIndex = 0;                                 // start at group index 0
-    this.groups = this.groupService.getGroups();          // get list of groups from Service
+    // this.groups = this.groupService.getGroups();          // get list of groups from Service
+    this.groupService.getGroups().subscribe(groups => {
+      console.log('groups=', groups);
+      this.groups = groups;
+    });
     this.groupService.setActiveGroup(this.groups[0]);     // set active group to Service
   }
 
