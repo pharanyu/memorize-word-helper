@@ -1,42 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, OnInit } from "@angular/core";
+import { EventEmitter } from "events";
 
-import { GroupService } from '../../services/group.service';
-import { WordsService } from '../../services/words.service';
-import { Word } from '../../services/word';
-import { ErrorService } from '../../services/error.service';
+import { GroupService } from "../../services/group.service";
+import { WordsService } from "../../services/words.service";
+import { Word } from "../../services/word";
+import { ErrorService } from "../../services/error.service";
 
 @Component({
-  selector: 'app-group-detail',
-  templateUrl: './group-detail.component.html',
-  styleUrls: ['./group-detail.component.css']
+  selector: "app-group-detail",
+  templateUrl: "./group-detail.component.html",
+  styleUrls: ["./group-detail.component.css"]
 })
 export class GroupDetailComponent implements OnInit {
-
-  words: Word[] = [];
-  newWords: Word[] = [];
-  group: string;
+  words: Word[] = []; // list of word from server
+  newWords: Word[] = []; // list of new adding word
+  group: string; // current group name
+  renameFrom: string; // if user rename group
+  renameTo: string; // if user rename group
   renameGroupFlag: boolean;
   addWordFlag: boolean;
 
   constructor(
     public wordsService: WordsService,
     public groupService: GroupService,
-    private errorService: ErrorService) { }
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {
     /** Get words in group when group is changed */
     this.groupService.groupUpdated.subscribe(update => {
       this.renameGroupFlag = false;
       this.addWordFlag = false;
-      this.wordsService.getWords(update)
-        .subscribe(
-          resWord => {
-            this.words = resWord;
-          },
-          err => {
-            this.errorService.putError(err.message);
-          });
+      this.wordsService.getWords(update).subscribe(
+        resWord => {
+          this.words = resWord;
+        },
+        err => {
+          this.errorService.putError(err.message);
+        }
+      );
       this.group = this.groupService.getActiveGroup();
     });
   }
@@ -48,7 +50,9 @@ export class GroupDetailComponent implements OnInit {
   renameOK(newName: string): void {
     console.log(newName);
     if (newName) {
+      this.renameFrom = this.group; // save name before change
       this.group = newName;
+      this.renameTo = newName; // save for send to server if user save
       this.renameGroupFlag = false;
     }
   }
@@ -72,6 +76,10 @@ export class GroupDetailComponent implements OnInit {
       this.words.push(tmpWord);
       this.addWordFlag = false;
     }
+  }
+
+  onSave(): void {
+    this.wordsService.addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
   }
 
 }

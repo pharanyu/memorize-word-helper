@@ -7,8 +7,7 @@ const Word = require("../models/WordModel");
 // Get All group names (not duplicate)
 router.get("/", (req, res, next) => {
   Word.find({})
-    .sort("group")
-    .select({ group: 1, _id: 0 })
+    .select({ group: true, _id: false })
     .distinct("group")
     .exec((err, data) => {
       if (err) {
@@ -16,14 +15,14 @@ router.get("/", (req, res, next) => {
           .status(500)
           .send({ error: { message: err.message, code: err.code } });
       }
-      res.status(200).send(data);
+      res.status(200).send(data.sort());
     });
 });
 
 // Get Word By Group
 router.get("/:group", (req, res, next) => {
   Word.find({ group: req.params.group })
-    .select({'_id': 0, '__v': 0})
+    .select({ _id: false, __v: false })
     .exec((err, data) => {
       if (err) {
         return res
@@ -34,16 +33,47 @@ router.get("/:group", (req, res, next) => {
     });
 });
 
-// Add Word
+// Add Words
 router.post("/", (req, res, next) => {
-  var doc = new Word(req.body);
-  doc.save((err, data) => {
+  req.body.forEach(eachBody => {
+    var doc = new Word(eachBody);
+    doc.save((err, data) => {
+      if (err) {
+        return res
+          .status(500)
+          .send({ error: { message: err.message, code: err.code } });
+      }
+    });
+  });
+  res.status(200).send({ success: "Add words success" });
+});
+
+// Rename Group
+router.put("/renamegroup/:old/:new", (req, res, next) => {
+  // find old group name in db
+  Word.find({ group: req.params.old }).exec((err, data) => {
     if (err) {
       return res
         .status(500)
         .send({ error: { message: err.message, code: err.code } });
     }
-    res.status(200).send({ success: "Add word success" });
+    // get list of old group name
+    let oldGroups = data;
+    oldGroups.forEach(oldGroup => {
+      // update each old -> new group name
+      Word.findByIdAndUpdate(
+        oldGroup._id,
+        { group: req.params.new },
+        (err, data) => {
+          if (err) {
+            return res
+              .status(500)
+              .send({ error: { message: err.message, code: err.code } });
+          }
+        }
+      );
+    });
+    res.status(200).send({ success: "Update groups name success" });
   });
 });
 
