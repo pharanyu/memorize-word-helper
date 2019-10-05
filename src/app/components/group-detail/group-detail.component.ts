@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { EventEmitter } from "events";
+import { Component, OnInit } from '@angular/core';
+import { EventEmitter } from 'events';
 
-import { GroupService } from "../../services/group.service";
-import { WordsService } from "../../services/words.service";
-import { Word } from "../../services/word";
-import { ErrorService } from "../../services/error.service";
+import { GroupService } from '../../services/group.service';
+import { WordsService } from '../../services/words.service';
+import { Word } from '../../services/word';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
-  selector: "app-group-detail",
-  templateUrl: "./group-detail.component.html",
-  styleUrls: ["./group-detail.component.css"]
+  selector: 'app-group-detail',
+  templateUrl: './group-detail.component.html',
+  styleUrls: ['./group-detail.component.css']
 })
 export class GroupDetailComponent implements OnInit {
   words: Word[] = []; // list of word from server
@@ -24,7 +24,7 @@ export class GroupDetailComponent implements OnInit {
     public wordsService: WordsService,
     public groupService: GroupService,
     private errorService: ErrorService
-  ) {}
+  ) { }
 
   ngOnInit() {
     /** Get words in group when group is changed */
@@ -79,7 +79,27 @@ export class GroupDetailComponent implements OnInit {
   }
 
   onSave(): void {
-    this.wordsService.addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
+    /*if (this.newWords.length === 0) {
+      this.wordsService
+        .renameGroup(this.renameFrom, this.renameTo)
+        .subscribe(_ => this.wordsService.saveCompleteSignal.emit('Rename Complete'));
+    } else {
+      this.wordsService
+        .addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
+    }*/
+    if (this.newWords.length !== 0 && this.renameTo) {
+      console.log('Add words and rename');
+      this.wordsService
+        .addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
+    } else if (this.newWords.length !== 0) {
+      this.wordsService
+        .addWord(this.newWords)
+        .subscribe(_ => this.wordsService.saveCompleteSignal.emit('Add words Complete'));
+    } else if (this.renameTo) {
+      this.wordsService
+        .renameGroup(this.renameFrom, this.renameTo)
+        .subscribe(_ => this.wordsService.saveCompleteSignal.emit('Rename Complete'));
+    }
   }
 
 }

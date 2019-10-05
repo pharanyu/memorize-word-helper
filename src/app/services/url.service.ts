@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class UrlService {
-  private urlConnectServer = "http://localhost:3001/api/words";
+  private urlConnectServer = 'http://localhost:3001/api/words';
 
   constructor() {}
 

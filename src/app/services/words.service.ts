@@ -1,32 +1,33 @@
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { EventEmitter } from "events";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { WORDSDB } from "./mock-wordsDB";
-import { Word } from "./word";
-import { GroupService } from "./group.service";
-import { UrlService } from "./url.service";
+import { WORDSDB } from './mock-wordsDB';
+import { Word } from './word';
+import { GroupService } from './group.service';
+import { UrlService } from './url.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class WordsService {
   words: Word[] = []; // store list words of current group
   group: string; // store current group
+  public saveCompleteSignal: EventEmitter<string> = new EventEmitter(); // Foremit when save complete
 
   constructor(
     private groupService: GroupService,
     private http: HttpClient,
     private urlService: UrlService
-  ) {}
+  ) { }
 
   /** Quary list words of current group from DataBase */
   getWordsFromActiveGroup(): Observable<Word[]> {
     // get current group from Service
     this.group = this.groupService.getActiveGroup();
 
-    console.log("reqGroup = " + this.group); // debug
+    console.log('reqGroup = ' + this.group); // debug
     if (this.group) {
       // check group not empty
       this.words = []; // clear current list words
@@ -68,9 +69,19 @@ export class WordsService {
     oldName: string,
     newName: string
   ): void {
-    this.addWord(addWords).subscribe(_1 => {
-      console.log(_1);
-      this.renameGroup(oldName, newName).subscribe(_2 => console.log(_2));
-    });
+    if (addWords !== undefined) {
+      this.addWord(addWords).subscribe(_1 => {
+        console.log(_1);
+        if (oldName && newName) {
+          this.renameGroup(oldName, newName).subscribe(_2 => {
+            console.log(_2);
+            this.saveCompleteSignal.emit('Save Complete');
+          });
+        } else {
+          this.saveCompleteSignal.emit('Save Complete');
+        }
+      });
+    }
   }
+
 }
