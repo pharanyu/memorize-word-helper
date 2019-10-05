@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { GroupService } from '../../services/group.service';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-group-list',
@@ -12,16 +14,25 @@ export class GroupListComponent implements OnInit {
   activeIndex: number;    // index of active group
   newGroup: string;       // new group name
 
-  constructor(private groupService: GroupService) { }
+  constructor(
+    private groupService: GroupService,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
     this.activeIndex = 0;                                 // start at group index 0
     // this.groups = this.groupService.getGroups();          // get list of groups from Service
-    this.groupService.getGroups().subscribe(groups => {
-      console.log('groups=', groups);
-      this.groups = groups;
-    });
-    this.groupService.setActiveGroup(this.groups[0]);     // set active group to Service
+    this.groups = [];
+    this.groupService.getGroups().subscribe(
+      groups => {
+        groups.forEach(group => {
+          this.groups.push(group);
+        });
+        this.groups = [...new Set(this.groups)];
+        this.groupService.setActiveGroup(this.groups[0]);     // set active group to Service
+      },
+      err => {
+        this.errorService.putError(err.message);
+      });
   }
 
   /** When selected group */

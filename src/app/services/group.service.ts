@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { GROUPS } from './mock-groups';
-import { WORDSDB } from './mock-wordsDB';
 import { Word } from './word';
-import { WordsService } from './words.service';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +15,18 @@ export class GroupService {
   private activeGroup: string;                              // store current active group
   groupUpdated: EventEmitter<string> = new EventEmitter();  // store emitter for group changing
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private urlService: UrlService) { }
 
   /** Get groups from Server */
   getGroups(): Observable<string[]> {
-    WORDSDB.forEach(word => this.groups.push(word.group));  // read group name of each element in DB
-    this.groups = [...new Set(this.groups)];                // remove duplicate group name
-    return of(this.groups);                                     // return list of groups (no duplicate name)
-
+    return this.http.get<string[]>(this.urlService.reqGroupUrl());
   }
 
   /** Get current active group */
-  getActiveGroup(): Observable<string> {
-    return of(this.activeGroup);
+  getActiveGroup(): string {
+    return this.activeGroup;
   }
 
   /** Set current active group */

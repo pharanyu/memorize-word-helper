@@ -1,7 +1,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-8">
+      <!-- Show group name -->
       <h1 *ngIf="renameGroupFlag === false" (click)="renameGroup()">{{group}}</h1>
+
+      <!-- Rename group -->
       <div *ngIf="renameGroupFlag === true" class="input-group">
         <input #writeName type="text" class="form-control" placeholder="{{group}}"
           aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
@@ -11,14 +14,20 @@
         </div>
       </div>
     </div>
+
+    <!-- Save button -->
     <div class="col text-right">
       <button class="btn btn-success btn-lg">SAVE</button>
     </div>
   </div>
+
   <div class="row">
     <div class="col">
+      <!-- Add word button -->
       <button *ngIf="addWordFlag === false" type="button" class="btn btn-outline-primary btn-sm"
         (click)="addWordClick()">Add new word</button>
+
+      <!-- Show when add word button is CLICK   -->
       <div *ngIf="addWordFlag === true" class="row">
         <div class="col">
           <input #newWord type="text" class="form-control" placeholder="Word">
@@ -31,8 +40,10 @@
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="col">
+      <!-- Table for show words in group -->
       <table class="table table-striped">
         <thead>
           <tr>

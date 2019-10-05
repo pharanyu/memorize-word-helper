@@ -4,6 +4,7 @@ import { EventEmitter } from 'events';
 import { GroupService } from '../../services/group.service';
 import { WordsService } from '../../services/words.service';
 import { Word } from '../../services/word';
+import { ErrorService } from '../../services/error.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -20,30 +21,23 @@ export class GroupDetailComponent implements OnInit {
 
   constructor(
     public wordsService: WordsService,
-    public groupService: GroupService) { }
+    public groupService: GroupService,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
-    this.renameGroupFlag = false;
-    this.addWordFlag = false;
-    /** Get words in group at initial */
-    this.groupService.getActiveGroup().subscribe(group => {
-      this.group = group;
-    });
-    this.wordsService.getWordsFromActiveGroup().subscribe(resWord => {
-      this.words = resWord;
-    });
-
     /** Get words in group when group is changed */
     this.groupService.groupUpdated.subscribe(update => {
       this.renameGroupFlag = false;
       this.addWordFlag = false;
       this.wordsService.getWords(update)
-        .subscribe(resWord => {
-          this.words = resWord;
-        });
-      this.groupService.getActiveGroup().subscribe(group => {
-        this.group = group;
-      });
+        .subscribe(
+          resWord => {
+            this.words = resWord;
+          },
+          err => {
+            this.errorService.putError(err.message);
+          });
+      this.group = this.groupService.getActiveGroup();
     });
   }
 

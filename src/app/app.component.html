@@ -1,10 +1,21 @@
-<div class="container-fluid">
-  <div class="row">
+<div class="container">
+
+  <!-- Normal page -->
+  <div *ngIf="!errMessage" class="row">
     <div class="col-3">
-        <app-group-list></app-group-list>
+      <app-group-list></app-group-list>
     </div>
     <div class="col">
-        <app-group-detail></app-group-detail>
+      <app-group-detail></app-group-detail>
+    </div>
+  </div>
+
+  <!-- when error occur -->
+  <div *ngIf="errMessage" class="row">
+    <div class="col">
+      <div class="alert alert-danger" role="alert" style="margin:20px;">
+        {{errMessage}}
+      </div>
     </div>
   </div>
 </div>
