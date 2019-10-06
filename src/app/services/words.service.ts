@@ -48,10 +48,19 @@ export class WordsService {
     }
   }
 
-  /** Add new word */
+  /** Add new words */
   addWord(newWords: Word[]): Observable<string> {
     if (newWords) {
       return this.http.post<string>(this.urlService.reqGroupUrl(), newWords);
+    } else {
+      return of('');
+    }
+  }
+
+  /** Delete words */
+  deleteWord(dltWords: Word[]): Observable<string> {
+    if (dltWords) {
+      return this.http.post<string>(this.urlService.reqDeleteWordsUrl(), dltWords);
     } else {
       return of('');
     }
@@ -70,15 +79,17 @@ export class WordsService {
   }
 
   /** Add list of words & Rename group */
-  addWordsAndRenameGroup(
+  addWordsDeltWordsRenameGroup(
     addWords: Word[],
+    dltWords: Word[],
     oldName: string,
     newName: string
   ): void {
-    forkJoin([this.addWord(addWords), this.renameGroup(oldName, newName)])
+    forkJoin([this.addWord(addWords), this.deleteWord(dltWords), this.renameGroup(oldName, newName)])
       .subscribe(respList => {
         console.log(respList[0]);
         console.log(respList[1]);
+        console.log(respList[2]);
         this.saveCompleteSignal.emit('Save complete');
       });
   }

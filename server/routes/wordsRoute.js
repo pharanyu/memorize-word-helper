@@ -48,6 +48,20 @@ router.post("/", (req, res, next) => {
   res.status(200).send({ success: "Add words success" });
 });
 
+// Delete Words
+router.post("/delete", (req, res, next) => {
+  req.body.forEach(eachBody => {
+    Word.findOneAndRemove({group: eachBody.group, word: eachBody.word, mean: eachBody.mean}).exec((err, data) => {
+      if (err) {
+        return res
+          .status(500)
+          .send({ error: { message: err.message, code: err.code } });
+      }
+    });
+  });
+  res.status(200).send({ success: "Delete words success" });
+});
+
 // Rename Group
 router.put("/renamegroup/:old/:new", (req, res, next) => {
   // find old group name in db

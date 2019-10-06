@@ -44,7 +44,7 @@
   <div class="row">
     <div class="col">
       <!-- Table for show words in group -->
-      <table class="table table-striped">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">No.</th>
@@ -53,7 +53,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let word of words; let i = index">
+          <tr *ngFor="let word of words; let i = index"
+            (click)="EditClick(word, i)"
+            [ngClass]="{'EditSelected': (i === editIndex)}">
             <th scope="row">{{i+1}}</th>
             <td>{{word.word}}</td>
             <td>{{word.mean}}</td>

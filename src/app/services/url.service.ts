@@ -19,4 +19,8 @@ export class UrlService {
   reqRenameGroupUrl(oldName: string, newName: string): string {
     return `${this.urlConnectServer}/renamegroup/${oldName}/${newName}`;
   }
+
+  reqDeleteWordsUrl(): string {
+    return `${this.urlConnectServer}/delete`;
+  }
 }

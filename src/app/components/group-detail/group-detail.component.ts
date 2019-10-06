@@ -14,9 +14,14 @@ import { ErrorService } from '../../services/error.service';
 export class GroupDetailComponent implements OnInit {
   words: Word[] = []; // list of word from server
   newWords: Word[] = []; // list of new adding word
+  dltWords: Word[] = [];
   group: string; // current group name
   renameFrom: string; // if user rename group
   renameTo: string; // if user rename group
+  editWord: Word;
+  editIndex: number;
+  editStyle: string;
+
   renameGroupFlag: boolean;
   addWordFlag: boolean;
 
@@ -70,21 +75,38 @@ export class GroupDetailComponent implements OnInit {
 
   addWordCancel(): void {
     this.addWordFlag = false;
+    this.editIndex = undefined;
   }
 
   addWordOk(newWord: string, newMean: string): void {
     if (newWord && newMean) {
       const tmpWord: Word = { group: this.group, word: newWord, mean: newMean };
       this.newWords.push(tmpWord);
-      this.words.push(tmpWord);
+      if (this.editWord) {
+        this.dltWords.push(this.editWord);
+        const tmpIndex = this.words.findIndex(word => word === this.editWord);
+        this.words[tmpIndex] = tmpWord;
+        this.editWord = undefined;
+      } else {
+        this.words.push(tmpWord);
+      }
       this.addWordFlag = false;
+      console.log(this.newWords);
+      console.log(this.dltWords);
     }
+  }
+
+  EditClick(word: Word, index: number) {
+    this.editWord = word;
+    this.editIndex = index;
+    this.addWordFlag = true;
+
   }
 
   onSave(): void {
     if (this.newWords.length !== 0 || this.renameTo) {
       this.wordsService
-        .addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
+        .addWordsDeltWordsRenameGroup(this.newWords, this.dltWords, this.renameFrom, this.renameTo);
     }
   }
 

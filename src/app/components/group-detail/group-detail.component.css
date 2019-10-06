@@ -4,15 +4,22 @@
 }
 
 h1:hover {
-  color: red;
+  color: #0275d8;
 }
 
 .row {
   margin-top: 1rem;
   padding-top: 1rem;
 }
+
 #AddNewInput {
   padding-top: 0rem;
   margin-top: 0rem;
   padding-right: 1rem;
+}
+
+.EditSelected {
+  background-color: #0275d8;
+  color: white;
+  /*transition: 0.3s;*/
 }
