@@ -1,7 +1,18 @@
+.BackGround {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 h1:hover {
   color: red;
 }
 
 .row {
-  margin-top: 2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+#AddNewInput {
+  padding-top: 0rem;
+  margin-top: 0rem;
+  padding-right: 1rem;
 }

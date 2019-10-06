@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.errService.reportError
       .subscribe((err: string) => this.errMessage = err);
-    this.wordsService.saveCompleteSignal
-      .subscribe(_ => location.reload());
+    // this.wordsService.saveCompleteSignal
+    //   .subscribe(_ => location.reload());
   }
 
 }

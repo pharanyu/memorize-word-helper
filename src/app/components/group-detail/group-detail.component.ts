@@ -41,6 +41,9 @@ export class GroupDetailComponent implements OnInit {
       );
       this.group = this.groupService.getActiveGroup();
     });
+
+    /** Refresh when save to server complete */
+    this.wordsService.saveCompleteSignal.subscribe(_ => location.reload());
   }
 
   renameGroup(): void {

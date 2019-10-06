@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { GroupService } from '../../services/group.service';
 import { ErrorService } from '../../services/error.service';
+import { WordsService } from '../../services/words.service';
 
 @Component({
   selector: 'app-group-list',
@@ -16,7 +17,8 @@ export class GroupListComponent implements OnInit {
 
   constructor(
     private groupService: GroupService,
-    private errorService: ErrorService) { }
+    private errorService: ErrorService,
+    private wordsService: WordsService) { }
 
   ngOnInit() {
     this.activeIndex = 0;                                 // start at group index 0
@@ -33,6 +35,9 @@ export class GroupListComponent implements OnInit {
       err => {
         this.errorService.putError(err.message);
       });
+
+    /** Refresh when save to server complete */
+    this.wordsService.saveCompleteSignal.subscribe(_ => location.reload());
   }
 
   /** When selected group */

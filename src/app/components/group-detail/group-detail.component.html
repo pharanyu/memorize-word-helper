@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid BackGround">
   <div class="row">
     <div class="col-8">
       <!-- Show group name -->
@@ -24,11 +24,11 @@
   <div class="row">
     <div class="col">
       <!-- Add word button -->
-      <button *ngIf="addWordFlag === false" type="button" class="btn btn-outline-primary btn-sm"
+      <button id="AddNewBtn" *ngIf="addWordFlag === false" type="button" class="btn btn-outline-primary btn-sm"
         (click)="addWordClick()">Add new word</button>
 
       <!-- Show when add word button is CLICK   -->
-      <div *ngIf="addWordFlag === true" class="row">
+      <div id="AddNewInput" *ngIf="addWordFlag === true" class="row">
         <div class="col">
           <input #newWord type="text" class="form-control" placeholder="Word">
         </div>
