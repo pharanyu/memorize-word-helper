@@ -82,26 +82,9 @@ export class GroupDetailComponent implements OnInit {
   }
 
   onSave(): void {
-    /*if (this.newWords.length === 0) {
-      this.wordsService
-        .renameGroup(this.renameFrom, this.renameTo)
-        .subscribe(_ => this.wordsService.saveCompleteSignal.emit('Rename Complete'));
-    } else {
+    if (this.newWords.length !== 0 || this.renameTo) {
       this.wordsService
         .addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
-    }*/
-    if (this.newWords.length !== 0 && this.renameTo) {
-      console.log('Add words and rename');
-      this.wordsService
-        .addWordsAndRenameGroup(this.newWords, this.renameFrom, this.renameTo);
-    } else if (this.newWords.length !== 0) {
-      this.wordsService
-        .addWord(this.newWords)
-        .subscribe(_ => this.wordsService.saveCompleteSignal.emit('Add words Complete'));
-    } else if (this.renameTo) {
-      this.wordsService
-        .renameGroup(this.renameFrom, this.renameTo)
-        .subscribe(_ => this.wordsService.saveCompleteSignal.emit('Rename Complete'));
     }
   }
 

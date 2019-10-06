@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -50,7 +50,11 @@ export class WordsService {
 
   /** Add new word */
   addWord(newWords: Word[]): Observable<string> {
-    return this.http.post<string>(this.urlService.reqGroupUrl(), newWords);
+    if (newWords) {
+      return this.http.post<string>(this.urlService.reqGroupUrl(), newWords);
+    } else {
+      return of('');
+    }
   }
 
   /** Rename group */
@@ -60,6 +64,8 @@ export class WordsService {
         this.urlService.reqRenameGroupUrl(oldName, newName),
         {}
       );
+    } else {
+      return of('');
     }
   }
 
@@ -69,19 +75,12 @@ export class WordsService {
     oldName: string,
     newName: string
   ): void {
-    if (addWords !== undefined) {
-      this.addWord(addWords).subscribe(_1 => {
-        console.log(_1);
-        if (oldName && newName) {
-          this.renameGroup(oldName, newName).subscribe(_2 => {
-            console.log(_2);
-            this.saveCompleteSignal.emit('Save Complete');
-          });
-        } else {
-          this.saveCompleteSignal.emit('Save Complete');
-        }
+    forkJoin([this.addWord(addWords), this.renameGroup(oldName, newName)])
+      .subscribe(respList => {
+        console.log(respList[0]);
+        console.log(respList[1]);
+        this.saveCompleteSignal.emit('Save complete');
       });
-    }
   }
 
 }
