@@ -38,6 +38,13 @@
         <input class="btn btn-warning" type="submit" (click)="addWordOk(newWord.value,newMean.value)" value="Confirm">
         <input class="btn btn-secondary" type="reset" (click)="addWordCancel()" value="Cancel">
       </div>
+
+      <!-- Delete button -->
+      <button *ngIf="addWordFlag === false" type="button" class="btn btn-outline-danger btn-sm"
+        style="margin-left: 1rem;" (click)="DeleteWordClick()">Delete words</button>
+      <!-- Cancel delete button -->
+      <button *ngIf="addWordFlag === false && deleteWordFlag === true" type="button" class="btn btn-light btn-sm"
+        style="margin-left: 1rem;" (click)="CancelDeleteWordClick()">End delete</button>
     </div>
   </div>
 
@@ -53,9 +60,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let word of words; let i = index"
-            (click)="EditClick(word, i)"
-            [ngClass]="{'EditSelected': (i === editIndex)}">
+          <tr *ngFor="let word of words; let i = index" (click)="EditClick(word, i)"
+            [style.background-color]="(i===editIndex)?'#0275d8':''" [style.color]="(i===editIndex)?'white':''"
+            [ngClass]="{'DeleteSelected':(deleteWordFlag===true)}">
             <th scope="row">{{i+1}}</th>
             <td>{{word.word}}</td>
             <td>{{word.mean}}</td>

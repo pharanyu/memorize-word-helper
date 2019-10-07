@@ -24,6 +24,7 @@ export class GroupDetailComponent implements OnInit {
 
   renameGroupFlag: boolean;
   addWordFlag: boolean;
+  deleteWordFlag: boolean;
 
   constructor(
     public wordsService: WordsService,
@@ -71,6 +72,7 @@ export class GroupDetailComponent implements OnInit {
 
   addWordClick(): void {
     this.addWordFlag = true;
+    this.deleteWordFlag = false;
   }
 
   addWordCancel(): void {
@@ -91,20 +93,39 @@ export class GroupDetailComponent implements OnInit {
         this.words.push(tmpWord);
       }
       this.addWordFlag = false;
-      console.log(this.newWords);
-      console.log(this.dltWords);
+      this.editIndex = undefined;
     }
   }
 
   EditClick(word: Word, index: number) {
-    this.editWord = word;
-    this.editIndex = index;
-    this.addWordFlag = true;
+    if (this.deleteWordFlag !== true) {
+      // For edit word
+      this.editWord = word;
+      this.editIndex = index;
+      this.addWordFlag = true;
+    } else {
+      // For delete word
+      this.dltWords.push(word);
+      this.words.splice(index, 1);
+      const findWord = this.newWords.find(i => i === word);
+      if (findWord !== undefined) {
+        this.newWords.splice(this.newWords.findIndex(i => i === findWord), 1);
+        console.log(this.newWords);
+      }
+    }
+  }
 
+  DeleteWordClick(): void {
+    this.deleteWordFlag = true;
+    this.addWordFlag = false;
+  }
+
+  CancelDeleteWordClick(): void {
+    this.deleteWordFlag = false;
   }
 
   onSave(): void {
-    if (this.newWords.length !== 0 || this.renameTo) {
+    if (this.newWords.length !== 0 || this.renameTo || this.dltWords.length !== 0) {
       this.wordsService
         .addWordsDeltWordsRenameGroup(this.newWords, this.dltWords, this.renameFrom, this.renameTo);
     }

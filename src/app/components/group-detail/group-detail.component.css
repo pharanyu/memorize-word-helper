@@ -23,3 +23,8 @@ h1:hover {
   color: white;
   /*transition: 0.3s;*/
 }
+
+.DeleteSelected:hover {
+  background-color: #d9534f;
+  color: white;
+}
