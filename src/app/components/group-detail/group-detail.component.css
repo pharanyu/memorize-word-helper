@@ -5,6 +5,8 @@
 
 h1:hover {
   color: #0275d8;
+  text-shadow: 2px 2px 15px #3792e0bd;
+  transition: 0.2s;
 }
 
 .row {
