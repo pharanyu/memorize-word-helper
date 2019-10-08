@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UrlService {
-  private urlConnectServer = 'https://memorize-word-helper.herokuapp.com/api/words';
+  private urlConnectServer = `${window.location.origin}/api/words`;
   // 'https://memorize-word-helper.herokuapp.com/api/words'
   // 'http://localhost:3001/api/words'
 
