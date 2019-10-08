@@ -1,8 +1,12 @@
 const express = require('express');
+const http = require('http');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const app = express();
+
+const PORT = process.env.PORT || 3001;
 
 // DB config
 const db = require('./config/keys').MongoURL;
@@ -14,21 +18,12 @@ mongoose.Promise = global.Promise;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Allow clint to access cross domain or ip-address
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'content-type, x-access-token');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-
-app.get('/', (req,res) => {
-  res.end('welcome to root path');
-});
+// Connect with Angular
+app.use(express.static(path.join(__dirname, '../dist/memorize-word-helper')));
+app.use('/', express.static(path.join(__dirname, '../dist/memorize-word-helper')));
 
 // ROUTES
 app.use('/api/words', require('./routes/wordsRoute'));
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Sever started on port ${PORT}`));
+const server = http.createServer(app);
+server.listen(PORT, () => console.log('Server running...'));
