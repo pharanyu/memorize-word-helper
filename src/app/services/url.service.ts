@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UrlService {
-  private urlConnectServer = 'http://localhost:3001/api/words';
+  private urlConnectServer = '/api/words';
 
   constructor() {}
 
