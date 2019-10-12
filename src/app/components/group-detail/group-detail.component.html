@@ -1,8 +1,8 @@
-<div class="container-fluid BackGround">
+<div class="container-fluid BackGround shadow rounded">
   <div class="row">
     <div class="col-8">
       <!-- Show group name -->
-      <h1 *ngIf="renameGroupFlag === false" (click)="renameGroup()">{{group}}</h1>
+      <h1 *ngIf="renameGroupFlag === false" class="text-truncate" (click)="renameGroup()">{{group}}</h1>
 
       <!-- Rename group -->
       <div *ngIf="renameGroupFlag === true" class="input-group">

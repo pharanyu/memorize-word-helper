@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { GroupListComponent } from './components/group-list/group-list.component';
 import { GroupDetailComponent } from './components/group-detail/group-detail.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RandomComponent } from './components/random/random.component';
+import { ManageComponent } from './components/manage/manage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GroupListComponent,
     GroupDetailComponent,
-    NavbarComponent
+    NavbarComponent,
+    RandomComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,

@@ -26,10 +26,7 @@ export class GroupListComponent implements OnInit {
     this.groups = [];
     this.groupService.getGroups().subscribe(
       groups => {
-        groups.forEach(group => {
-          this.groups.push(group);
-        });
-        this.groups = [...new Set(this.groups)];
+        this.groups = groups;
         this.groupService.setActiveGroup(this.groups[0]);     // set active group to Service
       },
       err => {

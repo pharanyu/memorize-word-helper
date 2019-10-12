@@ -1,10 +1,10 @@
-<div class="container-fluid BackGround">
+<div class="container-fluid BackGround shadow rounded">
   <!-- Add new group button -->
   <button type="button" class="btn btn-outline-primary" (click)="addGroup()">new group</button>
 
   <!-- List of groups -->
   <div class="list-group">
-    <a class="list-group-item list-group-item-action" [class.active]="activeIndex === i" (click)="onClick(i)"
+    <a class="list-group-item list-group-item-action text-truncate" [class.active]="activeIndex === i" (click)="onClick(i)"
       *ngFor="let group of groups; let i = index">
       {{group}}
     </a>

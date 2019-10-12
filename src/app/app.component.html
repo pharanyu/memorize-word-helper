@@ -1,16 +1,12 @@
 <div class="container">
   <app-navbar></app-navbar>
+</div>
+<!-- Normal page -->
+<div *ngIf="!errMessage">
+  <router-outlet></router-outlet>
+</div>
 
-  <!-- Normal page -->
-  <div *ngIf="!errMessage" class="row">
-    <div class="col-3">
-      <app-group-list></app-group-list>
-    </div>
-    <div class="col" style="padding-left: 0px">
-      <app-group-detail></app-group-detail>
-    </div>
-  </div>
-
+<div class="container">
   <!-- when error occur -->
   <div *ngIf="errMessage" class="row">
     <div class="col">
