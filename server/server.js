@@ -41,5 +41,8 @@ const forceSSL = function() {
 }
 app.use(forceSSL());
 
+/*
 const server = http.createServer(app);
 server.listen(PORT, () => console.log('Server running...'));
+*/
+app.listen(PORT, () => console.log('Server running...'));
