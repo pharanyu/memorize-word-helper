@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div *ngIf=\"!startRandomFlag\" class=\"col\">\n\n      <h5>Select group</h5>\n      <div class=\"overflow-auto\" style=\"height: 300px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\"\n            type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h5>Select Type</h5>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\" value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\" value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n\n    <div *ngIf=\"startRandomFlag\" class=\"col\">\n      <h1>Start Random Word</h1>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div *ngIf=\"!startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col\">\n\n      <h5>Select group</h5>\n      <div class=\"overflow-auto\" style=\"height: 300px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\" type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h5>Select Type</h5>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\"\n          value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\"\n          value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col text-center\">\n      <div class=\"progress\">\n        <div class=\"progress-bar bg-success\" role=\"progressbar\" [ngStyle]=\"{width: calPercent() + '%'}\"\n          aria-valuemin=\"0\" aria-valuemax=\"100\">\n          {{progressCur}}/{{progressMax}}\n        </div>\n      </div>\n      <br>\n      <h1 class=\"display-2\">{{major}}</h1>\n      <br>\n      <hr>\n      <div class=\"collapse\" id=\"collapseExample\">\n        <h1 class=\"display-4\">{{minor}}</h1>\n      </div>\n      <br>\n      <p style=\"margin-bottom: 0px;\">\n        <a class=\"btn btn btn-light\" data-toggle=\"collapse\" href=\"#collapseExample\" role=\"button\" aria-expanded=\"false\"\n          aria-controls=\"collapseExample\">\n          Show\n        </a>\n      </p>\n      <br>\n      <hr>\n      <button type=\"button\" (click)=\"randomPopWord()\" class=\"btn btn-primary btn-lg btn-block\">NEXT</button>\n      <button type=\"button\" (click)=\"endRandom()\" class=\"btn btn-secondary btn-lg btn-block\">END</button>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -849,24 +849,65 @@ let RandomComponent = class RandomComponent {
         this.selectedType = 'ShowWord';
         this.selectedGroups = [];
         this.startRandomFlag = false;
+        this.startRandomSignal = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }
     ngOnInit() {
-        this.groupService.getGroups().subscribe(groups => {
+        this.groupService.getGroups()
+            .subscribe(groups => {
             groups.forEach(group => this.selectedGroups.push({ name: group, selected: false }));
         }, err => {
             this.errorService.putError(err.message);
+        });
+        this.startRandomSignal.subscribe((flag) => {
+            if (flag === true) {
+                this.progressMax = this.selectedWords.length;
+                this.randomPopWord();
+            }
+            this.startRandomFlag = flag;
         });
     }
     onStartRandom() {
         // Check if not select any group
         const checkSelectedGroup = this.selectedGroups.filter(i => i.selected === true);
         if (checkSelectedGroup.length !== 0) {
-            console.log(checkSelectedGroup);
-            this.startRandomFlag = true;
+            this.wordsService.getWordsFromListGroup(checkSelectedGroup.map(({ name }) => name))
+                .subscribe(respWords => {
+                this.selectedWords = respWords;
+                this.startRandomSignal.emit(true);
+            });
         }
         else {
             alert('Please select any group');
         }
+    }
+    randomPopWord() {
+        if (this.selectedWords.length !== 0) {
+            this.currentWord = this.selectedWords.splice(Math.floor(Math.random() * this.selectedWords.length), 1).pop();
+            this.progressCur = this.progressMax - this.selectedWords.length;
+            if (this.selectedType === 'ShowWord') {
+                this.major = this.currentWord.word;
+                this.minor = this.currentWord.mean;
+            }
+            else if (this.selectedType === 'ShowMean') {
+                this.major = this.currentWord.mean;
+                this.minor = this.currentWord.word;
+            }
+        }
+        else {
+            this.endRandom();
+        }
+    }
+    endRandom() {
+        this.major = undefined;
+        this.minor = undefined;
+        this.selectedWords = undefined;
+        this.currentWord = undefined;
+        this.progressMax = undefined;
+        this.progressCur = undefined;
+        this.startRandomSignal.emit(false);
+    }
+    calPercent() {
+        return Math.floor((this.progressCur / this.progressMax) * 100);
     }
 };
 RandomComponent.ctorParameters = () => [
@@ -996,6 +1037,9 @@ let UrlService = class UrlService {
     reqWordsOfGroupUrl(reqGroup) {
         return `${this.urlConnectServer}/${reqGroup}`;
     }
+    reqWordsOfListGroupUrl() {
+        return `${this.urlConnectServer}/listgroup`;
+    }
     reqRenameGroupUrl(oldName, newName) {
         return `${this.urlConnectServer}/renamegroup/${oldName}/${newName}`;
     }
@@ -1061,6 +1105,18 @@ let WordsService = class WordsService {
             // Check req group is not empty
             this.words = []; // clear current list words
             return this.http.get(this.urlService.reqWordsOfGroupUrl(reqGroup));
+        }
+        else {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([]);
+        }
+    }
+    /** Get list words from req list group */
+    getWordsFromListGroup(reqListGroup) {
+        if (reqListGroup) {
+            return this.http.post(this.urlService.reqWordsOfListGroupUrl(), reqListGroup);
+        }
+        else {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([]);
         }
     }
     /** Add new words */
