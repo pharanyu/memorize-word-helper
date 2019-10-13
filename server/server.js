@@ -18,12 +18,12 @@ mongoose.Promise = global.Promise;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Connect with Angular
-app.use(express.static(path.join(__dirname, '../dist/memorize-word-helper')));
-app.use('/', express.static(path.join(__dirname, '../dist/memorize-word-helper/index.html')));
-
 // ROUTES
 app.use('/api/words', require('./routes/wordsRoute'));
+
+// Connect with Angular
+app.use(express.static(path.join(__dirname, '../dist/memorize-word-helper')));
+app.use('/*', express.static(path.join(__dirname, '../dist/memorize-word-helper/index.html')));
 
 const server = http.createServer(app);
 server.listen(PORT, () => console.log('Server running...'));
