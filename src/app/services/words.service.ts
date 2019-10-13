@@ -45,6 +45,17 @@ export class WordsService {
       return this.http.get<Word[]>(
         this.urlService.reqWordsOfGroupUrl(reqGroup)
       );
+    } else {
+      return of([]);
+    }
+  }
+
+  /** Get list words from req list group */
+  getWordsFromListGroup(reqListGroup: string[]): Observable<Word[]> {
+    if (reqListGroup) {
+      return this.http.post<Word[]>(this.urlService.reqWordsOfListGroupUrl(), reqListGroup);
+    } else {
+      return of([]);
     }
   }
 

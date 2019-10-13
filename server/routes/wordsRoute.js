@@ -33,6 +33,20 @@ router.get("/:group", (req, res, next) => {
     });
 });
 
+// Get Word By List Group
+router.post("/listgroup", (req, res, next) => {
+  Word.find({group: req.body})
+    .select({ _id: false, __v: false })
+    .exec((err, data) => {
+      if (err) {
+        return res
+          .status(500)
+          .send({ error: { message: err.message, code: err.code } });
+      }
+      res.status(200).send(data);
+  });
+});
+
 // Add Words
 router.post("/", (req, res, next) => {
   req.body.forEach(eachBody => {

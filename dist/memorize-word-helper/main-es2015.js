@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col\">\n\n      <h5>Select group</h5>\n\n      <div class=\"overflow-auto\" style=\"height: 300px;\">\n        <div *ngFor=\"let group of groups\" class=\"form-check\">\n          <input class=\"form-check-input\" type=\"checkbox\" value=\"\">\n          <label class=\"form-check-label\">\n            {{group}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h5>Select Type</h5>\n      <div class=\"form-check\">\n        <input class=\"form-check-input\" type=\"checkbox\" value=\"\">\n        <label class=\"form-check-label\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input class=\"form-check-input\" type=\"checkbox\" value=\"\">\n        <label class=\"form-check-label\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"button\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div *ngIf=\"!startRandomFlag\" class=\"col\">\n\n      <h5>Select group</h5>\n      <div class=\"overflow-auto\" style=\"height: 300px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\"\n            type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h5>Select Type</h5>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\" value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\" value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n\n    <div *ngIf=\"startRandomFlag\" class=\"col\">\n      <h1>Start Random Word</h1>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -443,13 +443,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_group_list_group_list_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/group-list/group-list.component */ "./src/app/components/group-list/group-list.component.ts");
-/* harmony import */ var _components_group_detail_group_detail_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/group-detail/group-detail.component */ "./src/app/components/group-detail/group-detail.component.ts");
-/* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
-/* harmony import */ var _components_random_random_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/random/random.component */ "./src/app/components/random/random.component.ts");
-/* harmony import */ var _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/manage/manage.component */ "./src/app/components/manage/manage.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_group_list_group_list_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/group-list/group-list.component */ "./src/app/components/group-list/group-list.component.ts");
+/* harmony import */ var _components_group_detail_group_detail_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/group-detail/group-detail.component */ "./src/app/components/group-detail/group-detail.component.ts");
+/* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
+/* harmony import */ var _components_random_random_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/random/random.component */ "./src/app/components/random/random.component.ts");
+/* harmony import */ var _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/manage/manage.component */ "./src/app/components/manage/manage.component.ts");
+
 
 
 
@@ -467,21 +469,23 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
-            _components_group_list_group_list_component__WEBPACK_IMPORTED_MODULE_7__["GroupListComponent"],
-            _components_group_detail_group_detail_component__WEBPACK_IMPORTED_MODULE_8__["GroupDetailComponent"],
-            _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_9__["NavbarComponent"],
-            _components_random_random_component__WEBPACK_IMPORTED_MODULE_10__["RandomComponent"],
-            _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_11__["ManageComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
+            _components_group_list_group_list_component__WEBPACK_IMPORTED_MODULE_8__["GroupListComponent"],
+            _components_group_detail_group_detail_component__WEBPACK_IMPORTED_MODULE_9__["GroupDetailComponent"],
+            _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_10__["NavbarComponent"],
+            _components_random_random_component__WEBPACK_IMPORTED_MODULE_11__["RandomComponent"],
+            _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_12__["ManageComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModule"],
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"]
         ],
         providers: [],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })
 ], AppModule);
 
@@ -842,14 +846,27 @@ let RandomComponent = class RandomComponent {
         this.groupService = groupService;
         this.errorService = errorService;
         this.wordsService = wordsService;
+        this.selectedType = 'ShowWord';
+        this.selectedGroups = [];
+        this.startRandomFlag = false;
     }
     ngOnInit() {
-        this.groups = [];
         this.groupService.getGroups().subscribe(groups => {
-            this.groups = groups;
+            groups.forEach(group => this.selectedGroups.push({ name: group, selected: false }));
         }, err => {
             this.errorService.putError(err.message);
         });
+    }
+    onStartRandom() {
+        // Check if not select any group
+        const checkSelectedGroup = this.selectedGroups.filter(i => i.selected === true);
+        if (checkSelectedGroup.length !== 0) {
+            console.log(checkSelectedGroup);
+            this.startRandomFlag = true;
+        }
+        else {
+            alert('Please select any group');
+        }
     }
 };
 RandomComponent.ctorParameters = () => [
