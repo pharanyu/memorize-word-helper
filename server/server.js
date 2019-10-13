@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 3001;
 const db = require('./config/keys').MongoURL;
 
 // Connect to DB
-mongoose.connect(db, {useNewUrlParser: true});
+mongoose.connect(db, {useUnifiedTopology: true, useNewUrlParser: true})
+  .then(() => console.log('DB Connected!'))
+  .catch(err => console.log(`DB Connection Error: ${err.message}`));
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());
