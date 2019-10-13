@@ -26,5 +26,9 @@ app.use(express.static(path.join(__dirname, '../dist/memorize-word-helper')));
 app.use('/*', express.static(path.join(__dirname, '../dist/memorize-word-helper/index.html')));
 
 const server = http.createServer(app);
-server.listen(PORT, () => console.log('Server running...'));
+server.listen(PORT, () => {
+  console.log('Server running...');
+  console.log(__dirname);
+  console.log(path.join(__dirname, '../dist/memorize-word-helper'));
+});
 
