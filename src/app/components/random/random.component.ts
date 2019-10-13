@@ -11,7 +11,9 @@ import { WordsService } from '../../services/words.service';
 })
 export class RandomComponent implements OnInit {
 
-  groups: string[];
+  selectedType = 'ShowWord';
+  selectedGroups = [];
+  startRandomFlag = false;
 
   constructor(
     private groupService: GroupService,
@@ -19,14 +21,23 @@ export class RandomComponent implements OnInit {
     private wordsService: WordsService) { }
 
   ngOnInit() {
-    this.groups = [];
     this.groupService.getGroups().subscribe(
       groups => {
-        this.groups = groups;
+        groups.forEach(group => this.selectedGroups.push({ name: group, selected: false }))
       },
       err => {
         this.errorService.putError(err.message);
       });
   }
 
+  onStartRandom() {
+    // Check if not select any group
+    const checkSelectedGroup = this.selectedGroups.filter(i => i.selected === true);
+    if (checkSelectedGroup.length !== 0) {
+      console.log(checkSelectedGroup);
+      this.startRandomFlag = true;
+    } else {
+      alert('Please select any group');
+    }
+  }
 }
