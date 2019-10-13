@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // Connect with Angular
-app.use(express.static(path.join(__dirname, '../dist/memorize-word-helper')));
-app.use('/', express.static(path.join(__dirname, '../dist/memorize-word-helper')));
+//app.use(express.static(path.join(__dirname, '../dist/memorize-word-helper')));
+//app.use('/', express.static(path.join(__dirname, '../dist/memorize-word-helper')));
 
 // ROUTES
 app.use('/api/words', require('./routes/wordsRoute'));
