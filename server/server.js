@@ -32,5 +32,7 @@ server.listen(PORT, () => {
   console.log('Server running...');
   console.log(__dirname);
   console.log(path.join(__dirname, '../dist/memorize-word-helper'));
+  console.log(process.env.MONGO_URI);
+  console.log(process.env.NODE_ENV);
 });
 
