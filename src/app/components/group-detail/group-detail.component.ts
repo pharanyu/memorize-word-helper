@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { GroupService } from '../../services/group.service';
 import { WordsService } from '../../services/words.service';
 import { Word } from '../../services/word';
 import { ErrorService } from '../../services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-group-detail',
   templateUrl: './group-detail.component.html',
   styleUrls: ['./group-detail.component.css']
 })
-export class GroupDetailComponent implements OnInit {
+export class GroupDetailComponent implements OnInit, OnDestroy {
   words: Word[] = []; // list of word from server
   newWords: Word[] = []; // list of new adding word
   dltWords: Word[] = [];
@@ -26,6 +26,8 @@ export class GroupDetailComponent implements OnInit {
   addWordFlag: boolean;
   deleteWordFlag: boolean;
 
+  memoSubsVar: Subscription;
+
   constructor(
     public wordsService: WordsService,
     public groupService: GroupService,
@@ -34,7 +36,7 @@ export class GroupDetailComponent implements OnInit {
 
   ngOnInit() {
     /** Get words in group when group is changed */
-    this.groupService.groupUpdated.subscribe(update => {
+    this.memoSubsVar = this.groupService.groupUpdated.subscribe(update => {
       this.renameGroupFlag = false;
       this.addWordFlag = false;
       this.wordsService.getWords(update).subscribe(
@@ -52,12 +54,17 @@ export class GroupDetailComponent implements OnInit {
     this.wordsService.saveCompleteSignal.subscribe(_ => location.reload());
   }
 
+  ngOnDestroy() {
+    if (this.memoSubsVar) {
+      this.memoSubsVar.unsubscribe();
+    }
+  }
+
   renameGroup(): void {
     this.renameGroupFlag = true;
   }
 
   renameOK(newName: string): void {
-    console.log(newName);
     if (newName) {
       this.renameFrom = this.group; // save name before change
       this.group = newName;
@@ -110,7 +117,6 @@ export class GroupDetailComponent implements OnInit {
       const findWord = this.newWords.find(i => i === word);
       if (findWord !== undefined) {
         this.newWords.splice(this.newWords.findIndex(i => i === findWord), 1);
-        console.log(this.newWords);
       }
     }
   }

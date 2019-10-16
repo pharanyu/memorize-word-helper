@@ -27,7 +27,6 @@ export class WordsService {
     // get current group from Service
     this.group = this.groupService.getActiveGroup();
 
-    console.log('reqGroup = ' + this.group); // debug
     if (this.group) {
       // check group not empty
       this.words = []; // clear current list words
@@ -98,9 +97,9 @@ export class WordsService {
   ): void {
     forkJoin([this.addWord(addWords), this.deleteWord(dltWords), this.renameGroup(oldName, newName)])
       .subscribe(respList => {
-        console.log(respList[0]);
-        console.log(respList[1]);
-        console.log(respList[2]);
+        // console.log(respList[0]);
+        // console.log(respList[1]);
+        // console.log(respList[2]);
         this.saveCompleteSignal.emit('Save complete');
       });
   }
