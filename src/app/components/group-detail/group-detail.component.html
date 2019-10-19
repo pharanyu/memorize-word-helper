@@ -29,14 +29,16 @@
 
       <!-- Show when add word button is CLICK   -->
       <div id="AddNewInput" *ngIf="addWordFlag === true" class="row">
-        <div class="col">
+        <div class="col-6 col-lg">
           <input #newWord type="text" class="form-control" placeholder="Word">
         </div>
-        <div class="col">
+        <div class="col-6 col-lg">
           <input #newMean type="text" class="form-control" placeholder="Meaning">
         </div>
+        <div class="col col-lg">
         <input class="btn btn-warning" type="submit" (click)="addWordOk(newWord.value,newMean.value)" value="Confirm">
         <input class="btn btn-secondary" type="reset" (click)="addWordCancel()" value="Cancel">
+        </div>
       </div>
 
       <!-- Delete button -->

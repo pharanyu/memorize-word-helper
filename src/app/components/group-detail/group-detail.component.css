@@ -20,6 +20,11 @@ h1:hover {
   padding-right: 1rem;
 }
 
+#AddNewInput input {
+  /*padding-top: 1rem;*/
+  margin-top: 1rem;
+}
+
 .EditSelected {
   background-color: #0275d8;
   color: white;
