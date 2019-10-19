@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
 body {
-  min-width: 650px;
+  min-width: 375px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767.98px) {
   .container {
     max-width: 100%;
   }

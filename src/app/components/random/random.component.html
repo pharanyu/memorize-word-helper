@@ -2,8 +2,8 @@
   <div *ngIf="!startRandomFlag" class="row BackGround shadow p-3 mb-5 bg-white rounded">
     <div class="col">
 
-      <h5>Select group</h5>
-      <div class="overflow-auto" style="height: 300px;">
+      <h3>Select group</h3>
+      <div class="overflow-auto" style="height: 200px;">
         <div *ngFor="let group of selectedGroups; let i = index" class="form-check">
           <input [(ngModel)]="group.selected" name="group.selected" class="form-check-input" type="checkbox">
           <label class="form-check-label">
@@ -13,7 +13,7 @@
       </div>
       <hr>
 
-      <h5>Select Type</h5>
+      <h3>Select Type</h3>
       <div class="form-check">
         <input [(ngModel)]="selectedType" class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
           value="ShowWord">

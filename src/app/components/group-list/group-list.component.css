@@ -5,13 +5,24 @@
 }
 
 button {
-  margin-top: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.text-center {
+  margin-bottom: 0px;
 }
 
 .list-group {
   margin: 1rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
+}
+
+@media (max-width: 576px) {
+  button.btn-light {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }

@@ -1,1 +1,12 @@
+.navbar-brand {
+  font-size: 25px;
+}
 
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 18px;
+  }
+  .nav-item {
+    font-size: 10px;
+  }
+}

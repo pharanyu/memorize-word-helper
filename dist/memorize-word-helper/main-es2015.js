@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid BackGround shadow rounded\">\n  <!-- Add new group button -->\n  <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"addGroup()\">new group</button>\n\n  <!-- List of groups -->\n  <div class=\"list-group\">\n    <a class=\"list-group-item list-group-item-action text-truncate\" [class.active]=\"activeIndex === i\" (click)=\"onClick(i)\"\n      *ngFor=\"let group of groups; let i = index\">\n      {{group}}\n    </a>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid BackGround shadow rounded\">\n  <div class=\"text-center\">\n  <button class=\"btn btn-light btn-sm d-sm-none\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseShowGroups\"\n    aria-expanded=\"false\" aria-controls=\"collapseShowGroups\">\n    Show group\n  </button>\n</div>\n  <br>\n  <div class=\"collapse d-sm-block\" id=\"collapseShowGroups\">\n    <!-- Add new group button -->\n    <button type=\"button\" class=\"btn btn-outline-primary\" (click)=\"addGroup()\">Add new group</button>\n\n    <!-- List of groups -->\n    <div class=\"list-group\">\n      <a class=\"list-group-item list-group-item-action text-truncate\" [class.active]=\"activeIndex === i\"\n        (click)=\"onClick(i)\" *ngFor=\"let group of groups; let i = index\">\n        {{group}}\n      </a>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-3\">\n      <app-group-list></app-group-list>\n    </div>\n    <div class=\"col\" style=\"padding-left: 0px\">\n      <app-group-detail></app-group-detail>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-12 col-sm-3\">\n      <app-group-list></app-group-list>\n    </div>\n    <div id=\"GroupDetail\" class=\"col\">\n      <app-group-detail></app-group-detail>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; font-size: 25px; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" style=\"padding-right: 1rem;\">\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div *ngIf=\"!startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col\">\n\n      <h5>Select group</h5>\n      <div class=\"overflow-auto\" style=\"height: 300px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\" type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h5>Select Type</h5>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\"\n          value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\"\n          value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col text-center\">\n      <div class=\"progress\">\n        <div class=\"progress-bar bg-success\" role=\"progressbar\" [ngStyle]=\"{width: calPercent() + '%'}\"\n          aria-valuemin=\"0\" aria-valuemax=\"100\">\n          {{progressCur}}/{{progressMax}}\n        </div>\n      </div>\n      <br>\n      <h1 class=\"display-2\">{{major}}</h1>\n      <br>\n      <hr>\n      <div class=\"collapse\" id=\"collapseExample\">\n        <h1 class=\"display-4\">{{minor}}</h1>\n      </div>\n      <br>\n      <p style=\"margin-bottom: 0px;\">\n        <a class=\"btn btn btn-light\" data-toggle=\"collapse\" href=\"#collapseExample\" role=\"button\" aria-expanded=\"false\"\n          aria-controls=\"collapseExample\">\n          Show\n        </a>\n      </p>\n      <br>\n      <hr>\n      <button type=\"button\" (click)=\"randomPopWord()\" class=\"btn btn-primary btn-lg btn-block\">NEXT</button>\n      <button type=\"button\" (click)=\"endRandom()\" class=\"btn btn-secondary btn-lg btn-block\">END</button>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div *ngIf=\"!startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col\">\n\n      <h3>Select group</h3>\n      <div class=\"overflow-auto\" style=\"height: 200px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\" type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h3>Select Type</h3>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\"\n          value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\"\n          value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col text-center\">\n      <div class=\"progress\">\n        <div class=\"progress-bar bg-success\" role=\"progressbar\" [ngStyle]=\"{width: calPercent() + '%'}\"\n          aria-valuemin=\"0\" aria-valuemax=\"100\">\n          {{progressCur}}/{{progressMax}}\n        </div>\n      </div>\n      <br>\n      <h1 class=\"display-4\">{{major}}</h1>\n      <br>\n      <hr>\n      <div class=\"collapse\" id=\"collapseExample\">\n        <h1 class=\"display-4\">{{minor}}</h1>\n      </div>\n      <br>\n      <p style=\"margin-bottom: 0px;\">\n        <a class=\"btn btn btn-light\" data-toggle=\"collapse\" href=\"#collapseExample\" role=\"button\" aria-expanded=\"false\"\n          aria-controls=\"collapseExample\">\n          Show\n        </a>\n      </p>\n      <br>\n      <hr>\n      <button type=\"button\" (click)=\"randomPopWord()\" class=\"btn btn-primary btn-lg btn-block\">NEXT</button>\n      <button type=\"button\" (click)=\"endRandom()\" class=\"btn btn-secondary btn-lg btn-block\">END</button>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -537,7 +537,7 @@ let GroupDetailComponent = class GroupDetailComponent {
     }
     ngOnInit() {
         /** Get words in group when group is changed */
-        this.groupService.groupUpdated.subscribe(update => {
+        this.memoSubsVar = this.groupService.groupUpdated.subscribe(update => {
             this.renameGroupFlag = false;
             this.addWordFlag = false;
             this.wordsService.getWords(update).subscribe(resWord => {
@@ -550,11 +550,15 @@ let GroupDetailComponent = class GroupDetailComponent {
         /** Refresh when save to server complete */
         this.wordsService.saveCompleteSignal.subscribe(_ => location.reload());
     }
+    ngOnDestroy() {
+        if (this.memoSubsVar) {
+            this.memoSubsVar.unsubscribe();
+        }
+    }
     renameGroup() {
         this.renameGroupFlag = true;
     }
     renameOK(newName) {
-        console.log(newName);
         if (newName) {
             this.renameFrom = this.group; // save name before change
             this.group = newName;
@@ -604,7 +608,6 @@ let GroupDetailComponent = class GroupDetailComponent {
             const findWord = this.newWords.find(i => i === word);
             if (findWord !== undefined) {
                 this.newWords.splice(this.newWords.findIndex(i => i === findWord), 1);
-                console.log(this.newWords);
             }
         }
     }
@@ -648,7 +651,7 @@ GroupDetailComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  padding: 0rem 0rem;\r\n}\r\n\r\nbutton {\r\n  margin-top: 1rem;\r\n  margin-left: 1rem;\r\n  margin-right: 1rem;\r\n}\r\n\r\n.list-group {\r\n  margin: 1rem;\r\n  margin-bottom: 1rem;\r\n  padding-bottom: 1rem;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ncm91cC1saXN0L2dyb3VwLWxpc3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHVCQUF1QjtFQUN2QixnQkFBZ0I7RUFDaEIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osbUJBQW1CO0VBQ25CLG9CQUFvQjtBQUN0QiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZ3JvdXAtbGlzdC9ncm91cC1saXN0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuQmFja0dyb3VuZCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgbWFyZ2luLXRvcDogMXJlbTtcclxuICBwYWRkaW5nOiAwcmVtIDByZW07XHJcbn1cclxuXHJcbmJ1dHRvbiB7XHJcbiAgbWFyZ2luLXRvcDogMXJlbTtcclxuICBtYXJnaW4tbGVmdDogMXJlbTtcclxuICBtYXJnaW4tcmlnaHQ6IDFyZW07XHJcbn1cclxuXHJcbi5saXN0LWdyb3VwIHtcclxuICBtYXJnaW46IDFyZW07XHJcbiAgbWFyZ2luLWJvdHRvbTogMXJlbTtcclxuICBwYWRkaW5nLWJvdHRvbTogMXJlbTtcclxufVxyXG4iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  padding: 0rem 0rem;\r\n}\r\n\r\nbutton {\r\n  margin-left: 1rem;\r\n  margin-right: 1rem;\r\n}\r\n\r\n.text-center {\r\n  margin-bottom: 0px;\r\n}\r\n\r\n.list-group {\r\n  margin: 1rem;\r\n  margin-bottom: 1rem;\r\n  padding-bottom: 1rem;\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  button.btn-light {\r\n    margin-top: 1rem;\r\n    margin-left: 1rem;\r\n    margin-right: 1rem;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ncm91cC1saXN0L2dyb3VwLWxpc3QuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHVCQUF1QjtFQUN2QixnQkFBZ0I7RUFDaEIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixtQkFBbUI7RUFDbkIsb0JBQW9CO0FBQ3RCOztBQUVBO0VBQ0U7SUFDRSxnQkFBZ0I7SUFDaEIsaUJBQWlCO0lBQ2pCLGtCQUFrQjtFQUNwQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9ncm91cC1saXN0L2dyb3VwLWxpc3QuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5CYWNrR3JvdW5kIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICBtYXJnaW4tdG9wOiAxcmVtO1xyXG4gIHBhZGRpbmc6IDByZW0gMHJlbTtcclxufVxyXG5cclxuYnV0dG9uIHtcclxuICBtYXJnaW4tbGVmdDogMXJlbTtcclxuICBtYXJnaW4tcmlnaHQ6IDFyZW07XHJcbn1cclxuXHJcbi50ZXh0LWNlbnRlciB7XHJcbiAgbWFyZ2luLWJvdHRvbTogMHB4O1xyXG59XHJcblxyXG4ubGlzdC1ncm91cCB7XHJcbiAgbWFyZ2luOiAxcmVtO1xyXG4gIG1hcmdpbi1ib3R0b206IDFyZW07XHJcbiAgcGFkZGluZy1ib3R0b206IDFyZW07XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA1NzZweCkge1xyXG4gIGJ1dHRvbi5idG4tbGlnaHQge1xyXG4gICAgbWFyZ2luLXRvcDogMXJlbTtcclxuICAgIG1hcmdpbi1sZWZ0OiAxcmVtO1xyXG4gICAgbWFyZ2luLXJpZ2h0OiAxcmVtO1xyXG4gIH1cclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -729,7 +732,7 @@ GroupListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbWFuYWdlL21hbmFnZS5jb21wb25lbnQuY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("@media (min-width: 576px) {\r\n  #GroupDetail {\r\n    padding-left: 0px;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9tYW5hZ2UvbWFuYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtJQUNFLGlCQUFpQjtFQUNuQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9tYW5hZ2UvbWFuYWdlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAbWVkaWEgKG1pbi13aWR0aDogNTc2cHgpIHtcclxuICAjR3JvdXBEZXRhaWwge1xyXG4gICAgcGFkZGluZy1sZWZ0OiAwcHg7XHJcbiAgfVxyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -773,7 +776,7 @@ ManageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".navbar-brand {\r\n  font-size: 25px;\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .navbar-brand {\r\n    font-size: 18px;\r\n  }\r\n  .nav-item {\r\n    font-size: 10px;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0U7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5uYXZiYXItYnJhbmQge1xyXG4gIGZvbnQtc2l6ZTogMjVweDtcclxufVxyXG5cclxuQG1lZGlhIChtYXgtd2lkdGg6IDU3NnB4KSB7XHJcbiAgLm5hdmJhci1icmFuZCB7XHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgfVxyXG4gIC5uYXYtaXRlbSB7XHJcbiAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgfVxyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -817,7 +820,7 @@ NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  margin-left: 0rem;\r\n  margin-right: 0rem;\r\n  padding: 0rem 0rem;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n}\r\n\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yYW5kb20vcmFuZG9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLDRFQUE0RTtBQUM5RSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcmFuZG9tL3JhbmRvbS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLkJhY2tHcm91bmQge1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gIG1hcmdpbi10b3A6IDFyZW07XHJcbiAgbWFyZ2luLWxlZnQ6IDByZW07XHJcbiAgbWFyZ2luLXJpZ2h0OiAwcmVtO1xyXG4gIHBhZGRpbmc6IDByZW0gMHJlbTtcclxuICBib3gtc2hhZG93OiAwIDRweCA4cHggMCByZ2JhKDAsIDAsIDAsIDAuMiksIDAgNnB4IDIwcHggMCByZ2JhKDAsIDAsIDAsIDAuMTkpO1xyXG59XHJcblxyXG4iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  margin-left: 0rem;\r\n  margin-right: 0rem;\r\n  padding: 0rem 0rem;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n}\r\n\r\n.checkbox-lg .custom-control-label::before,\r\n.checkbox-lg .custom-control-label::after {\r\n  top: .8rem;\r\n  width: 1.55rem;\r\n  height: 1.55rem;\r\n}\r\n\r\n.checkbox-lg .custom-control-label {\r\n  padding-top: 13px;\r\n  padding-left: 6px;\r\n}\r\n\r\n.checkbox-xl .custom-control-label::before,\r\n.checkbox-xl .custom-control-label::after {\r\n  top: 1.2rem;\r\n  width: 1.85rem;\r\n  height: 1.85rem;\r\n}\r\n\r\n.checkbox-xl .custom-control-label {\r\n  padding-top: 23px;\r\n  padding-left: 10px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yYW5kb20vcmFuZG9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLDRFQUE0RTtBQUM5RTs7QUFFQTs7RUFFRSxVQUFVO0VBQ1YsY0FBYztFQUNkLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsaUJBQWlCO0FBQ25COztBQUdBOztFQUVFLFdBQVc7RUFDWCxjQUFjO0VBQ2QsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixrQkFBa0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3JhbmRvbS9yYW5kb20uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5CYWNrR3JvdW5kIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICBtYXJnaW4tdG9wOiAxcmVtO1xyXG4gIG1hcmdpbi1sZWZ0OiAwcmVtO1xyXG4gIG1hcmdpbi1yaWdodDogMHJlbTtcclxuICBwYWRkaW5nOiAwcmVtIDByZW07XHJcbiAgYm94LXNoYWRvdzogMCA0cHggOHB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDZweCAyMHB4IDAgcmdiYSgwLCAwLCAwLCAwLjE5KTtcclxufVxyXG5cclxuLmNoZWNrYm94LWxnIC5jdXN0b20tY29udHJvbC1sYWJlbDo6YmVmb3JlLFxyXG4uY2hlY2tib3gtbGcgLmN1c3RvbS1jb250cm9sLWxhYmVsOjphZnRlciB7XHJcbiAgdG9wOiAuOHJlbTtcclxuICB3aWR0aDogMS41NXJlbTtcclxuICBoZWlnaHQ6IDEuNTVyZW07XHJcbn1cclxuXHJcbi5jaGVja2JveC1sZyAuY3VzdG9tLWNvbnRyb2wtbGFiZWwge1xyXG4gIHBhZGRpbmctdG9wOiAxM3B4O1xyXG4gIHBhZGRpbmctbGVmdDogNnB4O1xyXG59XHJcblxyXG5cclxuLmNoZWNrYm94LXhsIC5jdXN0b20tY29udHJvbC1sYWJlbDo6YmVmb3JlLFxyXG4uY2hlY2tib3gteGwgLmN1c3RvbS1jb250cm9sLWxhYmVsOjphZnRlciB7XHJcbiAgdG9wOiAxLjJyZW07XHJcbiAgd2lkdGg6IDEuODVyZW07XHJcbiAgaGVpZ2h0OiAxLjg1cmVtO1xyXG59XHJcblxyXG4uY2hlY2tib3gteGwgLmN1c3RvbS1jb250cm9sLWxhYmVsIHtcclxuICBwYWRkaW5nLXRvcDogMjNweDtcclxuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbn1cclxuIl19 */");
 
 /***/ }),
 
@@ -1092,7 +1095,6 @@ let WordsService = class WordsService {
     getWordsFromActiveGroup() {
         // get current group from Service
         this.group = this.groupService.getActiveGroup();
-        console.log('reqGroup = ' + this.group); // debug
         if (this.group) {
             // check group not empty
             this.words = []; // clear current list words
@@ -1150,9 +1152,9 @@ let WordsService = class WordsService {
     addWordsDeltWordsRenameGroup(addWords, dltWords, oldName, newName) {
         Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["forkJoin"])([this.addWord(addWords), this.deleteWord(dltWords), this.renameGroup(oldName, newName)])
             .subscribe(respList => {
-            console.log(respList[0]);
-            console.log(respList[1]);
-            console.log(respList[2]);
+            // console.log(respList[0]);
+            // console.log(respList[1]);
+            // console.log(respList[2]);
             this.saveCompleteSignal.emit('Save complete');
         });
     }

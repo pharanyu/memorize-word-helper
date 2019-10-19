@@ -1,12 +1,21 @@
 <div class="container-fluid BackGround shadow rounded">
-  <!-- Add new group button -->
-  <button type="button" class="btn btn-outline-primary" (click)="addGroup()">new group</button>
+  <div class="text-center">
+  <button class="btn btn-light btn-sm d-sm-none" type="button" data-toggle="collapse" data-target="#collapseShowGroups"
+    aria-expanded="false" aria-controls="collapseShowGroups">
+    Show group
+  </button>
+</div>
+  <br>
+  <div class="collapse d-sm-block" id="collapseShowGroups">
+    <!-- Add new group button -->
+    <button type="button" class="btn btn-outline-primary" (click)="addGroup()">Add new group</button>
 
-  <!-- List of groups -->
-  <div class="list-group">
-    <a class="list-group-item list-group-item-action text-truncate" [class.active]="activeIndex === i" (click)="onClick(i)"
-      *ngFor="let group of groups; let i = index">
-      {{group}}
-    </a>
+    <!-- List of groups -->
+    <div class="list-group">
+      <a class="list-group-item list-group-item-action text-truncate" [class.active]="activeIndex === i"
+        (click)="onClick(i)" *ngFor="let group of groups; let i = index">
+        {{group}}
+      </a>
+    </div>
   </div>
 </div>
