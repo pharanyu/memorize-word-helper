@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid BackGround shadow rounded\">\n  <div class=\"row\">\n    <div class=\"col-8\">\n      <!-- Show group name -->\n      <h1 *ngIf=\"renameGroupFlag === false\" class=\"text-truncate\" (click)=\"renameGroup()\">{{group}}</h1>\n\n      <!-- Rename group -->\n      <div *ngIf=\"renameGroupFlag === true\" class=\"input-group\">\n        <input #writeName type=\"text\" class=\"form-control\" placeholder=\"{{group}}\"\n          aria-label=\"Recipient's username with two button addons\" aria-describedby=\"button-addon4\">\n        <div class=\"input-group-append\" id=\"button-addon4\">\n          <button class=\"btn btn-outline-secondary\" type=\"button\" (click)=\"renameOK(writeName.value)\">OK</button>\n          <button class=\"btn btn-outline-secondary\" type=\"button\" (click)=\"renameCancel()\">CANCEL</button>\n        </div>\n      </div>\n    </div>\n\n    <!-- Save button -->\n    <div class=\"col text-right\">\n      <button class=\"btn btn-success btn-lg\" (click)=\"onSave()\">SAVE</button>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col\">\n      <!-- Add word button -->\n      <button id=\"AddNewBtn\" *ngIf=\"addWordFlag === false\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"\n        (click)=\"addWordClick()\">Add new word</button>\n\n      <!-- Show when add word button is CLICK   -->\n      <div id=\"AddNewInput\" *ngIf=\"addWordFlag === true\" class=\"row\">\n        <div class=\"col\">\n          <input #newWord type=\"text\" class=\"form-control\" placeholder=\"Word\">\n        </div>\n        <div class=\"col\">\n          <input #newMean type=\"text\" class=\"form-control\" placeholder=\"Meaning\">\n        </div>\n        <input class=\"btn btn-warning\" type=\"submit\" (click)=\"addWordOk(newWord.value,newMean.value)\" value=\"Confirm\">\n        <input class=\"btn btn-secondary\" type=\"reset\" (click)=\"addWordCancel()\" value=\"Cancel\">\n      </div>\n\n      <!-- Delete button -->\n      <button *ngIf=\"addWordFlag === false\" type=\"button\" class=\"btn btn-outline-danger btn-sm\"\n        style=\"margin-left: 1rem;\" (click)=\"DeleteWordClick()\">Delete words</button>\n      <!-- Cancel delete button -->\n      <button *ngIf=\"addWordFlag === false && deleteWordFlag === true\" type=\"button\" class=\"btn btn-light btn-sm\"\n        style=\"margin-left: 1rem;\" (click)=\"CancelDeleteWordClick()\">End delete</button>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col\">\n      <!-- Table for show words in group -->\n      <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">No.</th>\n            <th scope=\"col\">Word</th>\n            <th scope=\"col\">Meaning</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let word of words; let i = index\" (click)=\"EditClick(word, i)\"\n            [style.background-color]=\"(i===editIndex)?'#0275d8':''\" [style.color]=\"(i===editIndex)?'white':''\"\n            [ngClass]=\"{'DeleteSelected':(deleteWordFlag===true)}\">\n            <th scope=\"row\">{{i+1}}</th>\n            <td>{{word.word}}</td>\n            <td>{{word.mean}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container-fluid BackGround shadow rounded\">\n  <div class=\"row\">\n    <div class=\"col-8\">\n      <!-- Show group name -->\n      <h1 *ngIf=\"renameGroupFlag === false\" class=\"text-truncate\" (click)=\"renameGroup()\">{{group}}</h1>\n\n      <!-- Rename group -->\n      <div *ngIf=\"renameGroupFlag === true\" class=\"input-group\">\n        <input #writeName type=\"text\" class=\"form-control\" placeholder=\"{{group}}\"\n          aria-label=\"Recipient's username with two button addons\" aria-describedby=\"button-addon4\">\n        <div class=\"input-group-append\" id=\"button-addon4\">\n          <button class=\"btn btn-outline-secondary\" type=\"button\" (click)=\"renameOK(writeName.value)\">OK</button>\n          <button class=\"btn btn-outline-secondary\" type=\"button\" (click)=\"renameCancel()\">CANCEL</button>\n        </div>\n      </div>\n    </div>\n\n    <!-- Save button -->\n    <div class=\"col text-right\">\n      <button class=\"btn btn-success btn-lg\" (click)=\"onSave()\">SAVE</button>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col\">\n      <!-- Add word button -->\n      <button id=\"AddNewBtn\" *ngIf=\"addWordFlag === false\" type=\"button\" class=\"btn btn-outline-primary btn-sm\"\n        (click)=\"addWordClick()\">Add new word</button>\n\n      <!-- Show when add word button is CLICK   -->\n      <div id=\"AddNewInput\" *ngIf=\"addWordFlag === true\" class=\"row\">\n        <div class=\"col-6 col-lg\">\n          <input #newWord type=\"text\" class=\"form-control\" placeholder=\"Word\">\n        </div>\n        <div class=\"col-6 col-lg\">\n          <input #newMean type=\"text\" class=\"form-control\" placeholder=\"Meaning\">\n        </div>\n        <div class=\"col col-lg\">\n        <input class=\"btn btn-warning\" type=\"submit\" (click)=\"addWordOk(newWord.value,newMean.value)\" value=\"Confirm\">\n        <input class=\"btn btn-secondary\" type=\"reset\" (click)=\"addWordCancel()\" value=\"Cancel\">\n        </div>\n      </div>\n\n      <!-- Delete button -->\n      <button *ngIf=\"addWordFlag === false\" type=\"button\" class=\"btn btn-outline-danger btn-sm\"\n        style=\"margin-left: 1rem;\" (click)=\"DeleteWordClick()\">Delete words</button>\n      <!-- Cancel delete button -->\n      <button *ngIf=\"addWordFlag === false && deleteWordFlag === true\" type=\"button\" class=\"btn btn-light btn-sm\"\n        style=\"margin-left: 1rem;\" (click)=\"CancelDeleteWordClick()\">End delete</button>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col\">\n      <!-- Table for show words in group -->\n      <table class=\"table table-hover\">\n        <thead>\n          <tr>\n            <th scope=\"col\">No.</th>\n            <th scope=\"col\">Word</th>\n            <th scope=\"col\">Meaning</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let word of words; let i = index\" (click)=\"EditClick(word, i)\"\n            [style.background-color]=\"(i===editIndex)?'#0275d8':''\" [style.color]=\"(i===editIndex)?'white':''\"\n            [ngClass]=\"{'DeleteSelected':(deleteWordFlag===true)}\">\n            <th scope=\"row\">{{i+1}}</th>\n            <td>{{word.word}}</td>\n            <td>{{word.mean}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-sm navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/signup\" routerLinkActive=\"active\">login</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -98,6 +98,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div *ngIf=\"!startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col\">\n\n      <h3>Select group</h3>\n      <div class=\"overflow-auto\" style=\"height: 200px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\" type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h3>Select Type</h3>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\"\n          value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\"\n          value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col text-center\">\n      <div class=\"progress\">\n        <div class=\"progress-bar bg-success\" role=\"progressbar\" [ngStyle]=\"{width: calPercent() + '%'}\"\n          aria-valuemin=\"0\" aria-valuemax=\"100\">\n          {{progressCur}}/{{progressMax}}\n        </div>\n      </div>\n      <br>\n      <h1 class=\"display-4\">{{major}}</h1>\n      <br>\n      <hr>\n      <div class=\"collapse\" id=\"collapseExample\">\n        <h1 class=\"display-4\">{{minor}}</h1>\n      </div>\n      <br>\n      <p style=\"margin-bottom: 0px;\">\n        <a class=\"btn btn btn-light\" data-toggle=\"collapse\" href=\"#collapseExample\" role=\"button\" aria-expanded=\"false\"\n          aria-controls=\"collapseExample\">\n          Show\n        </a>\n      </p>\n      <br>\n      <hr>\n      <button type=\"button\" (click)=\"randomPopWord()\" class=\"btn btn-primary btn-lg btn-block\">NEXT</button>\n      <button type=\"button\" (click)=\"endRandom()\" class=\"btn btn-secondary btn-lg btn-block\">END</button>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-up/sign-up.component.html":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-up/sign-up.component.html ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"alert alert-success\" role=\"alert\" *ngIf=\"showSuccessMessage\">\n  Sign Up successfully\n</div>\n\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"serverErrorMessage\">\n  {{serverErrorMessage}}\n</div>\n\n<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUpForm.valid && onSubmit(signUpForm)\">\n\n  <div class=\"form-group\">\n    <label for=\"userNameID\">User Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"userNameID\" #userName=\"ngModel\"\n      [(ngModel)]=\"userService.selectedUser.userName\" name=\"userName\" placeholder=\"Create user name\">\n    <div *ngIf=\"signUpForm.submitted && !userName.value\">\n      <small class=\"form-text text-danger\">User name is required.</small>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"passwordID\">Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"passwordID\" #password=\"ngModel\"\n      [(ngModel)]=\"userService.selectedUser.password\" name=\"password\" placeholder=\"Create password\" required\n      minlength=\"6\">\n    <div *ngIf=\"signUpForm.submitted && password.errors\">\n      <small *ngIf=\"password.errors.required\" class=\"form-text text-danger\">Password is required.</small>\n      <small *ngIf=\"password.errors.minlength\" class=\"form-text text-danger\">Password must be atleast 6\n        characters.</small>\n    </div>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary\">Sign Up</button>\n</form>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"BackGround shadow p-3 mb-5 bg-white rounded\">\n    <ul class=\"nav justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/signin\" routerLinkActive=\"active\">Sign In</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/signup\" routerLinkActive=\"active\">Sign Up</a>\n      </li>\n    </ul>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -345,15 +371,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _components_random_random_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/random/random.component */ "./src/app/components/random/random.component.ts");
 /* harmony import */ var _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/manage/manage.component */ "./src/app/components/manage/manage.component.ts");
+/* harmony import */ var _components_user_user_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/user/user.component */ "./src/app/components/user/user.component.ts");
+/* harmony import */ var _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/user/sign-up/sign-up.component */ "./src/app/components/user/sign-up/sign-up.component.ts");
+
+
 
 
 
 
 
 const routes = [
+    {
+        path: 'signup', component: _components_user_user_component__WEBPACK_IMPORTED_MODULE_5__["UserComponent"],
+        children: [{ path: '', component: _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_6__["SignUpComponent"] }]
+    },
     { path: 'random', component: _components_random_random_component__WEBPACK_IMPORTED_MODULE_3__["RandomComponent"] },
     { path: 'manage', component: _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_4__["ManageComponent"] },
-    { path: '', redirectTo: 'random', pathMatch: 'full' }
+    { path: '', redirectTo: 'signup', pathMatch: 'full' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -451,6 +485,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/navbar/navbar.component */ "./src/app/components/navbar/navbar.component.ts");
 /* harmony import */ var _components_random_random_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/random/random.component */ "./src/app/components/random/random.component.ts");
 /* harmony import */ var _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/manage/manage.component */ "./src/app/components/manage/manage.component.ts");
+/* harmony import */ var _components_user_user_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/user/user.component */ "./src/app/components/user/user.component.ts");
+/* harmony import */ var _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/user/sign-up/sign-up.component */ "./src/app/components/user/sign-up/sign-up.component.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/user.service */ "./src/app/services/user.service.ts");
+
+
+
 
 
 
@@ -474,7 +514,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_group_detail_group_detail_component__WEBPACK_IMPORTED_MODULE_9__["GroupDetailComponent"],
             _components_navbar_navbar_component__WEBPACK_IMPORTED_MODULE_10__["NavbarComponent"],
             _components_random_random_component__WEBPACK_IMPORTED_MODULE_11__["RandomComponent"],
-            _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_12__["ManageComponent"]
+            _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_12__["ManageComponent"],
+            _components_user_user_component__WEBPACK_IMPORTED_MODULE_13__["UserComponent"],
+            _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_14__["SignUpComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -484,7 +526,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"]
         ],
-        providers: [],
+        providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_15__["UserService"]],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })
 ], AppModule);
@@ -502,7 +544,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n}\r\n\r\nh1:hover {\r\n  color: #0275d8;\r\n  text-shadow: 2px 2px 15px #3792e0bd;\r\n  transition: 0.2s;\r\n}\r\n\r\n.row {\r\n  margin-top: 1rem;\r\n  padding-top: 1rem;\r\n}\r\n\r\n#AddNewInput {\r\n  padding-top: 0rem;\r\n  margin-top: 0rem;\r\n  padding-right: 1rem;\r\n}\r\n\r\n.EditSelected {\r\n  background-color: #0275d8;\r\n  color: white;\r\n  /*transition: 0.3s;*/\r\n}\r\n\r\n.DeleteSelected:hover {\r\n  background-color: #d9534f;\r\n  color: white;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ncm91cC1kZXRhaWwvZ3JvdXAtZGV0YWlsLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsNEVBQTRFO0FBQzlFOztBQUVBO0VBQ0UsY0FBYztFQUNkLG1DQUFtQztFQUNuQyxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsWUFBWTtFQUNaLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixZQUFZO0FBQ2QiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2dyb3VwLWRldGFpbC9ncm91cC1kZXRhaWwuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5CYWNrR3JvdW5kIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICBib3gtc2hhZG93OiAwIDRweCA4cHggMCByZ2JhKDAsIDAsIDAsIDAuMiksIDAgNnB4IDIwcHggMCByZ2JhKDAsIDAsIDAsIDAuMTkpO1xyXG59XHJcblxyXG5oMTpob3ZlciB7XHJcbiAgY29sb3I6ICMwMjc1ZDg7XHJcbiAgdGV4dC1zaGFkb3c6IDJweCAycHggMTVweCAjMzc5MmUwYmQ7XHJcbiAgdHJhbnNpdGlvbjogMC4ycztcclxufVxyXG5cclxuLnJvdyB7XHJcbiAgbWFyZ2luLXRvcDogMXJlbTtcclxuICBwYWRkaW5nLXRvcDogMXJlbTtcclxufVxyXG5cclxuI0FkZE5ld0lucHV0IHtcclxuICBwYWRkaW5nLXRvcDogMHJlbTtcclxuICBtYXJnaW4tdG9wOiAwcmVtO1xyXG4gIHBhZGRpbmctcmlnaHQ6IDFyZW07XHJcbn1cclxuXHJcbi5FZGl0U2VsZWN0ZWQge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMwMjc1ZDg7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG4gIC8qdHJhbnNpdGlvbjogMC4zczsqL1xyXG59XHJcblxyXG4uRGVsZXRlU2VsZWN0ZWQ6aG92ZXIge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNkOTUzNGY7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n}\r\n\r\nh1:hover {\r\n  color: #0275d8;\r\n  text-shadow: 2px 2px 15px #3792e0bd;\r\n  transition: 0.2s;\r\n}\r\n\r\n.row {\r\n  margin-top: 1rem;\r\n  padding-top: 1rem;\r\n}\r\n\r\n#AddNewInput {\r\n  padding-top: 0rem;\r\n  margin-top: 0rem;\r\n  padding-right: 1rem;\r\n}\r\n\r\n#AddNewInput input {\r\n  /*padding-top: 1rem;*/\r\n  margin-top: 1rem;\r\n}\r\n\r\n.EditSelected {\r\n  background-color: #0275d8;\r\n  color: white;\r\n  /*transition: 0.3s;*/\r\n}\r\n\r\n.DeleteSelected:hover {\r\n  background-color: #d9534f;\r\n  color: white;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ncm91cC1kZXRhaWwvZ3JvdXAtZGV0YWlsLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsNEVBQTRFO0FBQzlFOztBQUVBO0VBQ0UsY0FBYztFQUNkLG1DQUFtQztFQUNuQyxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxxQkFBcUI7RUFDckIsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UseUJBQXlCO0VBQ3pCLFlBQVk7RUFDWixvQkFBb0I7QUFDdEI7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsWUFBWTtBQUNkIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9ncm91cC1kZXRhaWwvZ3JvdXAtZGV0YWlsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuQmFja0dyb3VuZCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgYm94LXNoYWRvdzogMCA0cHggOHB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDZweCAyMHB4IDAgcmdiYSgwLCAwLCAwLCAwLjE5KTtcclxufVxyXG5cclxuaDE6aG92ZXIge1xyXG4gIGNvbG9yOiAjMDI3NWQ4O1xyXG4gIHRleHQtc2hhZG93OiAycHggMnB4IDE1cHggIzM3OTJlMGJkO1xyXG4gIHRyYW5zaXRpb246IDAuMnM7XHJcbn1cclxuXHJcbi5yb3cge1xyXG4gIG1hcmdpbi10b3A6IDFyZW07XHJcbiAgcGFkZGluZy10b3A6IDFyZW07XHJcbn1cclxuXHJcbiNBZGROZXdJbnB1dCB7XHJcbiAgcGFkZGluZy10b3A6IDByZW07XHJcbiAgbWFyZ2luLXRvcDogMHJlbTtcclxuICBwYWRkaW5nLXJpZ2h0OiAxcmVtO1xyXG59XHJcblxyXG4jQWRkTmV3SW5wdXQgaW5wdXQge1xyXG4gIC8qcGFkZGluZy10b3A6IDFyZW07Ki9cclxuICBtYXJnaW4tdG9wOiAxcmVtO1xyXG59XHJcblxyXG4uRWRpdFNlbGVjdGVkIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDI3NWQ4O1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxuICAvKnRyYW5zaXRpb246IDAuM3M7Ki9cclxufVxyXG5cclxuLkRlbGV0ZVNlbGVjdGVkOmhvdmVyIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZDk1MzRmO1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -776,7 +818,7 @@ ManageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".navbar-brand {\r\n  font-size: 25px;\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .navbar-brand {\r\n    font-size: 18px;\r\n  }\r\n  .nav-item {\r\n    font-size: 10px;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0U7SUFDRSxlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxlQUFlO0VBQ2pCO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5uYXZiYXItYnJhbmQge1xyXG4gIGZvbnQtc2l6ZTogMjVweDtcclxufVxyXG5cclxuQG1lZGlhIChtYXgtd2lkdGg6IDU3NnB4KSB7XHJcbiAgLm5hdmJhci1icmFuZCB7XHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgfVxyXG4gIC5uYXYtaXRlbSB7XHJcbiAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgfVxyXG59XHJcbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".navbar-brand {\r\n  font-size: 25px;\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .navbar-brand {\r\n    font-size: 20px;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0U7SUFDRSxlQUFlO0VBQ2pCO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5uYXZiYXItYnJhbmQge1xyXG4gIGZvbnQtc2l6ZTogMjVweDtcclxufVxyXG5cclxuQG1lZGlhIChtYXgtd2lkdGg6IDU3NnB4KSB7XHJcbiAgLm5hdmJhci1icmFuZCB7XHJcbiAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgfVxyXG59XHJcbiJdfQ== */");
 
 /***/ }),
 
@@ -820,7 +862,7 @@ NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  margin-left: 0rem;\r\n  margin-right: 0rem;\r\n  padding: 0rem 0rem;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n}\r\n\r\n.checkbox-lg .custom-control-label::before,\r\n.checkbox-lg .custom-control-label::after {\r\n  top: .8rem;\r\n  width: 1.55rem;\r\n  height: 1.55rem;\r\n}\r\n\r\n.checkbox-lg .custom-control-label {\r\n  padding-top: 13px;\r\n  padding-left: 6px;\r\n}\r\n\r\n.checkbox-xl .custom-control-label::before,\r\n.checkbox-xl .custom-control-label::after {\r\n  top: 1.2rem;\r\n  width: 1.85rem;\r\n  height: 1.85rem;\r\n}\r\n\r\n.checkbox-xl .custom-control-label {\r\n  padding-top: 23px;\r\n  padding-left: 10px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yYW5kb20vcmFuZG9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLDRFQUE0RTtBQUM5RTs7QUFFQTs7RUFFRSxVQUFVO0VBQ1YsY0FBYztFQUNkLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsaUJBQWlCO0FBQ25COztBQUdBOztFQUVFLFdBQVc7RUFDWCxjQUFjO0VBQ2QsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixrQkFBa0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3JhbmRvbS9yYW5kb20uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5CYWNrR3JvdW5kIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICBtYXJnaW4tdG9wOiAxcmVtO1xyXG4gIG1hcmdpbi1sZWZ0OiAwcmVtO1xyXG4gIG1hcmdpbi1yaWdodDogMHJlbTtcclxuICBwYWRkaW5nOiAwcmVtIDByZW07XHJcbiAgYm94LXNoYWRvdzogMCA0cHggOHB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDZweCAyMHB4IDAgcmdiYSgwLCAwLCAwLCAwLjE5KTtcclxufVxyXG5cclxuLmNoZWNrYm94LWxnIC5jdXN0b20tY29udHJvbC1sYWJlbDo6YmVmb3JlLFxyXG4uY2hlY2tib3gtbGcgLmN1c3RvbS1jb250cm9sLWxhYmVsOjphZnRlciB7XHJcbiAgdG9wOiAuOHJlbTtcclxuICB3aWR0aDogMS41NXJlbTtcclxuICBoZWlnaHQ6IDEuNTVyZW07XHJcbn1cclxuXHJcbi5jaGVja2JveC1sZyAuY3VzdG9tLWNvbnRyb2wtbGFiZWwge1xyXG4gIHBhZGRpbmctdG9wOiAxM3B4O1xyXG4gIHBhZGRpbmctbGVmdDogNnB4O1xyXG59XHJcblxyXG5cclxuLmNoZWNrYm94LXhsIC5jdXN0b20tY29udHJvbC1sYWJlbDo6YmVmb3JlLFxyXG4uY2hlY2tib3gteGwgLmN1c3RvbS1jb250cm9sLWxhYmVsOjphZnRlciB7XHJcbiAgdG9wOiAxLjJyZW07XHJcbiAgd2lkdGg6IDEuODVyZW07XHJcbiAgaGVpZ2h0OiAxLjg1cmVtO1xyXG59XHJcblxyXG4uY2hlY2tib3gteGwgLmN1c3RvbS1jb250cm9sLWxhYmVsIHtcclxuICBwYWRkaW5nLXRvcDogMjNweDtcclxuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbn1cclxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  margin-left: 0rem;\r\n  margin-right: 0rem;\r\n  padding: 0rem 0rem;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .display-4 {\r\n    font-size: 25px;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9yYW5kb20vcmFuZG9tLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx1QkFBdUI7RUFDdkIsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLDRFQUE0RTtBQUM5RTs7QUFFQTtFQUNFO0lBQ0UsZUFBZTtFQUNqQjtBQUNGIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9yYW5kb20vcmFuZG9tLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuQmFja0dyb3VuZCB7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgbWFyZ2luLXRvcDogMXJlbTtcclxuICBtYXJnaW4tbGVmdDogMHJlbTtcclxuICBtYXJnaW4tcmlnaHQ6IDByZW07XHJcbiAgcGFkZGluZzogMHJlbSAwcmVtO1xyXG4gIGJveC1zaGFkb3c6IDAgNHB4IDhweCAwIHJnYmEoMCwgMCwgMCwgMC4yKSwgMCA2cHggMjBweCAwIHJnYmEoMCwgMCwgMCwgMC4xOSk7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA1NzZweCkge1xyXG4gIC5kaXNwbGF5LTQge1xyXG4gICAgZm9udC1zaXplOiAyNXB4O1xyXG4gIH1cclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -925,6 +967,124 @@ RandomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./random.component.css */ "./src/app/components/random/random.component.css")).default]
     })
 ], RandomComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/user/sign-up/sign-up.component.css":
+/*!***************************************************************!*\
+  !*** ./src/app/components/user/sign-up/sign-up.component.css ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdXNlci9zaWduLXVwL3NpZ24tdXAuY29tcG9uZW50LmNzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/components/user/sign-up/sign-up.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/components/user/sign-up/sign-up.component.ts ***!
+  \**************************************************************/
+/*! exports provided: SignUpComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignUpComponent", function() { return SignUpComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+let SignUpComponent = class SignUpComponent {
+    constructor(userService) {
+        this.userService = userService;
+    }
+    ngOnInit() {
+    }
+    onSubmit(form) {
+        this.userService.postUser(form.value).subscribe(res => {
+            this.showSuccessMessage = true;
+            setTimeout(() => this.showSuccessMessage = false, 4000);
+            this.resetForm(form);
+        }, err => {
+            if (err.status === 422) {
+                this.serverErrorMessage = err.error.join('<br>');
+            }
+            else {
+                this.serverErrorMessage = 'Sorry, Can\'t sign up cause something went wrong.';
+            }
+        });
+    }
+    resetForm(form) {
+        this.userService.selectedUser = {
+            userName: '',
+            password: ''
+        };
+        form.resetForm();
+        this.serverErrorMessage = '';
+    }
+};
+SignUpComponent.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"] }
+];
+SignUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-sign-up',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./sign-up.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-up/sign-up.component.html")).default,
+        providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]],
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./sign-up.component.css */ "./src/app/components/user/sign-up/sign-up.component.css")).default]
+    })
+], SignUpComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/user/user.component.css":
+/*!****************************************************!*\
+  !*** ./src/app/components/user/user.component.css ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".BackGround {\r\n  background-color: white;\r\n  margin-top: 1rem;\r\n  margin-left: 0rem;\r\n  margin-right: 0rem;\r\n  padding: 0rem 0rem;\r\n}\r\n\r\n.nav-link {\r\n  font-size: 25px;\r\n}\r\n\r\n.active {\r\n  font-weight: bold;\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .display-4 {\r\n    font-size: 20px;\r\n  }\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy91c2VyL3VzZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHVCQUF1QjtFQUN2QixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUNBO0VBQ0UsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0U7SUFDRSxlQUFlO0VBQ2pCO0FBQ0YiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3VzZXIvdXNlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLkJhY2tHcm91bmQge1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gIG1hcmdpbi10b3A6IDFyZW07XHJcbiAgbWFyZ2luLWxlZnQ6IDByZW07XHJcbiAgbWFyZ2luLXJpZ2h0OiAwcmVtO1xyXG4gIHBhZGRpbmc6IDByZW0gMHJlbTtcclxufVxyXG5cclxuLm5hdi1saW5rIHtcclxuICBmb250LXNpemU6IDI1cHg7XHJcbn1cclxuLmFjdGl2ZSB7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuXHJcbkBtZWRpYSAobWF4LXdpZHRoOiA1NzZweCkge1xyXG4gIC5kaXNwbGF5LTQge1xyXG4gICAgZm9udC1zaXplOiAyMHB4O1xyXG4gIH1cclxufVxyXG4iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/components/user/user.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/components/user/user.component.ts ***!
+  \***************************************************/
+/*! exports provided: UserComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserComponent", function() { return UserComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let UserComponent = class UserComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+};
+UserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-user',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./user.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/user.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./user.component.css */ "./src/app/components/user/user.component.css")).default]
+    })
+], UserComponent);
 
 
 
@@ -1055,6 +1215,47 @@ UrlService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providedIn: 'root'
     })
 ], UrlService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/user.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/user.service.ts ***!
+  \******************************************/
+/*! exports provided: UserService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let UserService = class UserService {
+    constructor(http) {
+        this.http = http;
+        this.selectedUser = {
+            userName: '',
+            password: ''
+        };
+    }
+    postUser(user) {
+        return this.http.post('/api/user/register', user);
+    }
+};
+UserService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], UserService);
 
 
 

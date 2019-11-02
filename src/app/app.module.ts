@@ -11,6 +11,9 @@ import { GroupDetailComponent } from './components/group-detail/group-detail.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RandomComponent } from './components/random/random.component';
 import { ManageComponent } from './components/manage/manage.component';
+import { UserComponent } from './components/user/user.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { ManageComponent } from './components/manage/manage.component';
     GroupDetailComponent,
     NavbarComponent,
     RandomComponent,
-    ManageComponent
+    ManageComponent,
+    UserComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,7 @@ import { ManageComponent } from './components/manage/manage.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

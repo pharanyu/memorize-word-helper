@@ -4,9 +4,6 @@
 
 @media (max-width: 576px) {
   .navbar-brand {
-    font-size: 18px;
-  }
-  .nav-item {
-    font-size: 10px;
+    font-size: 20px;
   }
 }
