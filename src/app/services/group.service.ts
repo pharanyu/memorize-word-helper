@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Word } from './word';
 import { UrlService } from './url.service';
@@ -14,6 +14,7 @@ export class GroupService {
   private groups: string[] = [];                            // store list of groups
   private activeGroup: string;                              // store current active group
   groupUpdated: EventEmitter<string> = new EventEmitter();  // store emitter for group changing
+  noAuthHeader = { headers: new HttpHeaders({ 'noauth': 'True' }) };
 
   constructor(
     private http: HttpClient,
@@ -21,7 +22,7 @@ export class GroupService {
 
   /** Get groups from Server */
   getGroups(): Observable<string[]> {
-    return this.http.get<string[]>(this.urlService.reqGroupUrl());
+    return this.http.get<string[]>(this.urlService.reqGroupUrl(), this.noAuthHeader);
   }
 
   /** Get current active group */

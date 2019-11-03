@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-sm navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/signup\" routerLinkActive=\"active\">login</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-sm navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/user\" routerLinkActive=\"active\">login</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -98,6 +98,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div *ngIf=\"!startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col\">\n\n      <h3>Select group</h3>\n      <div class=\"overflow-auto\" style=\"height: 200px;\">\n        <div *ngFor=\"let group of selectedGroups; let i = index\" class=\"form-check\">\n          <input [(ngModel)]=\"group.selected\" name=\"group.selected\" class=\"form-check-input\" type=\"checkbox\">\n          <label class=\"form-check-label\">\n            {{group.name}}\n          </label>\n        </div>\n      </div>\n      <hr>\n\n      <h3>Select Type</h3>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios1\"\n          value=\"ShowWord\">\n        <label class=\"form-check-label\" for=\"gridRadios1\">\n          Show wording\n        </label>\n      </div>\n      <div class=\"form-check\">\n        <input [(ngModel)]=\"selectedType\" class=\"form-check-input\" type=\"radio\" name=\"gridRadios\" id=\"gridRadios2\"\n          value=\"ShowMean\">\n        <label class=\"form-check-label\" for=\"gridRadios2\">\n          Show meaning\n        </label>\n      </div>\n      <hr>\n\n      <button type=\"submit\" (click)=\"onStartRandom()\" class=\"btn btn-primary btn-lg btn-block\">Start Random</button>\n\n    </div>\n  </div>\n\n  <div *ngIf=\"startRandomFlag\" class=\"row BackGround shadow p-3 mb-5 bg-white rounded\">\n    <div class=\"col text-center\">\n      <div class=\"progress\">\n        <div class=\"progress-bar bg-success\" role=\"progressbar\" [ngStyle]=\"{width: calPercent() + '%'}\"\n          aria-valuemin=\"0\" aria-valuemax=\"100\">\n          {{progressCur}}/{{progressMax}}\n        </div>\n      </div>\n      <br>\n      <h1 class=\"display-4\">{{major}}</h1>\n      <br>\n      <hr>\n      <div class=\"collapse\" id=\"collapseExample\">\n        <h1 class=\"display-4\">{{minor}}</h1>\n      </div>\n      <br>\n      <p style=\"margin-bottom: 0px;\">\n        <a class=\"btn btn btn-light\" data-toggle=\"collapse\" href=\"#collapseExample\" role=\"button\" aria-expanded=\"false\"\n          aria-controls=\"collapseExample\">\n          Show\n        </a>\n      </p>\n      <br>\n      <hr>\n      <button type=\"button\" (click)=\"randomPopWord()\" class=\"btn btn-primary btn-lg btn-block\">NEXT</button>\n      <button type=\"button\" (click)=\"endRandom()\" class=\"btn btn-secondary btn-lg btn-block\">END</button>\n    </div>\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-in/sign-in.component.html":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-in/sign-in.component.html ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"serverErrorMessage\">\n  {{serverErrorMessage}}\n</div>\n\n<form #signInForm=\"ngForm\" (ngSubmit)=\"signInForm.valid && onSubmit(signInForm)\">\n\n  <div class=\"form-group\">\n    <label for=\"usernameID\">User Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"usernameID\" name=\"userName\" #userName=\"ngModel\"\n      [(ngModel)]=\"model.userName\" placeholder=\"Enter user name\" required>\n    <div *ngIf=\"signInForm.submitted && !userName.value\">\n      <small class=\"form-text text-danger\">User name is required.</small>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"passwordID\">Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"passwordID\" name=\"password\" #password=\"ngModel\"\n      [(ngModel)]=\"model.password\" placeholder=\"Enter password\" required minlength=\"6\">\n    <div *ngIf=\"signInForm.submitted && password.errors\">\n      <small *ngIf=\"password.errors.required\" class=\"form-text text-danger\">Password is required.</small>\n      <small *ngIf=\"password.errors.minlength\" class=\"form-text text-danger\">Password must be atleast 6\n        characters.</small>\n    </div>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary\">Log In</button>\n</form>\n");
 
 /***/ }),
 
@@ -123,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"BackGround shadow p-3 mb-5 bg-white rounded\">\n    <ul class=\"nav justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/signin\" routerLinkActive=\"active\">Sign In</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/signup\" routerLinkActive=\"active\">Sign Up</a>\n      </li>\n    </ul>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"BackGround shadow p-3 mb-5 bg-white rounded\">\n    <ul class=\"nav justify-content-center\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/user/login\" routerLinkActive=\"active\">Sign In</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/user/signup\" routerLinkActive=\"active\">Sign Up</a>\n      </li>\n    </ul>\n    <br>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -373,6 +386,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/manage/manage.component */ "./src/app/components/manage/manage.component.ts");
 /* harmony import */ var _components_user_user_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/user/user.component */ "./src/app/components/user/user.component.ts");
 /* harmony import */ var _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/user/sign-up/sign-up.component */ "./src/app/components/user/sign-up/sign-up.component.ts");
+/* harmony import */ var _components_user_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/user/sign-in/sign-in.component */ "./src/app/components/user/sign-in/sign-in.component.ts");
+/* harmony import */ var _auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth/auth.guard */ "./src/app/auth/auth.guard.ts");
+
+
 
 
 
@@ -382,12 +399,16 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: 'signup', component: _components_user_user_component__WEBPACK_IMPORTED_MODULE_5__["UserComponent"],
-        children: [{ path: '', component: _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_6__["SignUpComponent"] }]
+        path: 'user', component: _components_user_user_component__WEBPACK_IMPORTED_MODULE_5__["UserComponent"],
+        children: [
+            { path: 'signup', component: _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_6__["SignUpComponent"] },
+            { path: 'login', component: _components_user_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_7__["SignInComponent"] },
+            { path: '', redirectTo: 'login', pathMatch: 'full' }
+        ]
     },
-    { path: 'random', component: _components_random_random_component__WEBPACK_IMPORTED_MODULE_3__["RandomComponent"] },
-    { path: 'manage', component: _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_4__["ManageComponent"] },
-    { path: '', redirectTo: 'signup', pathMatch: 'full' }
+    { path: 'random', component: _components_random_random_component__WEBPACK_IMPORTED_MODULE_3__["RandomComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
+    { path: 'manage', component: _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_4__["ManageComponent"], canActivate: [_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
+    { path: '', redirectTo: 'user/login', pathMatch: 'full' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -488,6 +509,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_user_user_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/user/user.component */ "./src/app/components/user/user.component.ts");
 /* harmony import */ var _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/user/sign-up/sign-up.component */ "./src/app/components/user/sign-up/sign-up.component.ts");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/user.service */ "./src/app/services/user.service.ts");
+/* harmony import */ var _components_user_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/user/sign-in/sign-in.component */ "./src/app/components/user/sign-in/sign-in.component.ts");
+/* harmony import */ var _auth_auth_guard__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./auth/auth.guard */ "./src/app/auth/auth.guard.ts");
+/* harmony import */ var _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./auth/auth.interceptor */ "./src/app/auth/auth.interceptor.ts");
+
+
+
 
 
 
@@ -516,7 +543,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _components_random_random_component__WEBPACK_IMPORTED_MODULE_11__["RandomComponent"],
             _components_manage_manage_component__WEBPACK_IMPORTED_MODULE_12__["ManageComponent"],
             _components_user_user_component__WEBPACK_IMPORTED_MODULE_13__["UserComponent"],
-            _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_14__["SignUpComponent"]
+            _components_user_sign_up_sign_up_component__WEBPACK_IMPORTED_MODULE_14__["SignUpComponent"],
+            _components_user_sign_in_sign_in_component__WEBPACK_IMPORTED_MODULE_16__["SignInComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -526,10 +554,117 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"]
         ],
-        providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_15__["UserService"]],
+        providers: [
+            {
+                provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HTTP_INTERCEPTORS"],
+                useClass: _auth_auth_interceptor__WEBPACK_IMPORTED_MODULE_18__["AuthInterceptor"],
+                multi: true
+            },
+            _auth_auth_guard__WEBPACK_IMPORTED_MODULE_17__["AuthGuard"],
+            _services_user_service__WEBPACK_IMPORTED_MODULE_15__["UserService"]
+        ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })
 ], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/auth.guard.ts":
+/*!************************************!*\
+  !*** ./src/app/auth/auth.guard.ts ***!
+  \************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+let AuthGuard = class AuthGuard {
+    constructor(userService, router) {
+        this.userService = userService;
+        this.router = router;
+    }
+    canActivate(next, state) {
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigateByUrl('/user/login');
+            this.userService.deleteToken();
+            return false;
+        }
+        return true;
+    }
+};
+AuthGuard.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+AuthGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], AuthGuard);
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/auth.interceptor.ts":
+/*!******************************************!*\
+  !*** ./src/app/auth/auth.interceptor.ts ***!
+  \******************************************/
+/*! exports provided: AuthInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthInterceptor", function() { return AuthInterceptor; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+
+let AuthInterceptor = class AuthInterceptor {
+    constructor(userService, router) {
+        this.userService = userService;
+        this.router = router;
+    }
+    intercept(req, next) {
+        if (req.headers.get('noauth')) {
+            return next.handle(req.clone());
+        }
+        else {
+            const clonedreq = req.clone({
+                headers: req.headers.set('authorization', this.userService.getToken())
+            });
+            return next.handle(clonedreq).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(event => { }, err => {
+                if (err.error.auth === false) {
+                    this.router.navigateByUrl('/user/login');
+                }
+            }));
+        }
+    }
+};
+AuthInterceptor.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
+AuthInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+], AuthInterceptor);
 
 
 
@@ -972,6 +1107,76 @@ RandomComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/components/user/sign-in/sign-in.component.css":
+/*!***************************************************************!*\
+  !*** ./src/app/components/user/sign-in/sign-in.component.css ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdXNlci9zaWduLWluL3NpZ24taW4uY29tcG9uZW50LmNzcyJ9 */");
+
+/***/ }),
+
+/***/ "./src/app/components/user/sign-in/sign-in.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/components/user/sign-in/sign-in.component.ts ***!
+  \**************************************************************/
+/*! exports provided: SignInComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignInComponent", function() { return SignInComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/user.service */ "./src/app/services/user.service.ts");
+
+
+
+
+let SignInComponent = class SignInComponent {
+    constructor(userService, router) {
+        this.userService = userService;
+        this.router = router;
+        this.model = {
+            userName: '',
+            password: ''
+        };
+    }
+    ngOnInit() {
+        if (this.userService.isLoggedIn()) {
+            this.router.navigateByUrl('/random');
+        }
+    }
+    onSubmit(form) {
+        this.userService.login(form.value).subscribe(res => {
+            this.userService.setToken(res['token']);
+            this.router.navigateByUrl('/random');
+        }, err => {
+            this.serverErrorMessage = err.error.message;
+        });
+    }
+};
+SignInComponent.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+SignInComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-sign-in',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./sign-in.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-in/sign-in.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./sign-in.component.css */ "./src/app/components/user/sign-in/sign-in.component.css")).default]
+    })
+], SignInComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/user/sign-up/sign-up.component.css":
 /*!***************************************************************!*\
   !*** ./src/app/components/user/sign-up/sign-up.component.css ***!
@@ -1037,7 +1242,6 @@ SignUpComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-sign-up',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./sign-up.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/user/sign-up/sign-up.component.html")).default,
-        providers: [_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]],
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./sign-up.component.css */ "./src/app/components/user/sign-up/sign-up.component.css")).default]
     })
 ], SignUpComponent);
@@ -1147,10 +1351,11 @@ let GroupService = class GroupService {
         this.urlService = urlService;
         this.groups = []; // store list of groups
         this.groupUpdated = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // store emitter for group changing
+        this.noAuthHeader = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'noauth': 'True' }) };
     }
     /** Get groups from Server */
     getGroups() {
-        return this.http.get(this.urlService.reqGroupUrl());
+        return this.http.get(this.urlService.reqGroupUrl(), this.noAuthHeader);
     }
     /** Get current active group */
     getActiveGroup() {
@@ -1243,9 +1448,46 @@ let UserService = class UserService {
             userName: '',
             password: ''
         };
+        this.noAuthHeader = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'noauth': 'True' }) };
     }
+    /** Http Methods */
     postUser(user) {
-        return this.http.post('/api/user/register', user);
+        return this.http.post('/api/user/register', user, this.noAuthHeader);
+    }
+    login(authCredentials) {
+        return this.http.post('/api/user/authenticate', authCredentials, this.noAuthHeader);
+    }
+    getUserProfile() {
+        return this.http.get('/api/user/userprofile');
+    }
+    /** Other Methods */
+    setToken(token) {
+        localStorage.setItem('token', token);
+    }
+    getToken() {
+        return localStorage.getItem('token');
+    }
+    deleteToken() {
+        localStorage.removeItem('token');
+    }
+    getUserPayload() {
+        const token = this.getToken();
+        if (token) {
+            const userPayload = atob(token.split('.')[1]);
+            return JSON.parse(userPayload);
+        }
+        else {
+            return null;
+        }
+    }
+    isLoggedIn() {
+        const userPayload = this.getUserPayload();
+        if (userPayload) {
+            return userPayload.exp > Date.now() / 1000;
+        }
+        else {
+            return false;
+        }
     }
 };
 UserService.ctorParameters = () => [
@@ -1291,6 +1533,7 @@ let WordsService = class WordsService {
         this.urlService = urlService;
         this.words = []; // store list words of current group
         this.saveCompleteSignal = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // Foremit when save complete
+        this.noAuthHeader = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({ 'noauth': 'True' }) };
     }
     /** Quary list words of current group from DataBase */
     getWordsFromActiveGroup() {
@@ -1299,7 +1542,7 @@ let WordsService = class WordsService {
         if (this.group) {
             // check group not empty
             this.words = []; // clear current list words
-            return this.http.get(this.urlService.reqWordsOfGroupUrl(this.group));
+            return this.http.get(this.urlService.reqWordsOfGroupUrl(this.group), this.noAuthHeader);
         }
     }
     /** Get list words from req group */
@@ -1307,7 +1550,7 @@ let WordsService = class WordsService {
         if (reqGroup) {
             // Check req group is not empty
             this.words = []; // clear current list words
-            return this.http.get(this.urlService.reqWordsOfGroupUrl(reqGroup));
+            return this.http.get(this.urlService.reqWordsOfGroupUrl(reqGroup), this.noAuthHeader);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([]);
@@ -1316,7 +1559,7 @@ let WordsService = class WordsService {
     /** Get list words from req list group */
     getWordsFromListGroup(reqListGroup) {
         if (reqListGroup) {
-            return this.http.post(this.urlService.reqWordsOfListGroupUrl(), reqListGroup);
+            return this.http.post(this.urlService.reqWordsOfListGroupUrl(), reqListGroup, this.noAuthHeader);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([]);
@@ -1325,7 +1568,7 @@ let WordsService = class WordsService {
     /** Add new words */
     addWord(newWords) {
         if (newWords) {
-            return this.http.post(this.urlService.reqGroupUrl(), newWords);
+            return this.http.post(this.urlService.reqGroupUrl(), newWords, this.noAuthHeader);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])('');
@@ -1334,7 +1577,7 @@ let WordsService = class WordsService {
     /** Delete words */
     deleteWord(dltWords) {
         if (dltWords) {
-            return this.http.post(this.urlService.reqDeleteWordsUrl(), dltWords);
+            return this.http.post(this.urlService.reqDeleteWordsUrl(), dltWords, this.noAuthHeader);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])('');
@@ -1343,7 +1586,7 @@ let WordsService = class WordsService {
     /** Rename group */
     renameGroup(oldName, newName) {
         if (oldName && newName) {
-            return this.http.put(this.urlService.reqRenameGroupUrl(oldName, newName), {});
+            return this.http.put(this.urlService.reqRenameGroupUrl(oldName, newName), {}, this.noAuthHeader);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])('');
