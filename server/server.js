@@ -3,6 +3,7 @@ const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const app = express();
 
@@ -17,8 +18,13 @@ mongoose.connect(db, { useUnifiedTopology: true, useNewUrlParser: true, useCreat
   .catch(err => console.log(`DB Connection Error: ${err.message}`));
 mongoose.Promise = global.Promise;
 
+// Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+// Passport Config
+require('./config/passportConfig');
+app.use(passport.initialize());
 
 // ROUTES
 app.use('/api/user', require('./routes/userRoute'));
