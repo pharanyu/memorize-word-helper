@@ -15,7 +15,6 @@ export class WordsService {
   words: Word[] = []; // store list words of current group
   group: string; // store current group
   public saveCompleteSignal: EventEmitter<string> = new EventEmitter(); // Foremit when save complete
-  noAuthHeader = { headers: new HttpHeaders({ 'noauth': 'True' }) };
 
   constructor(
     private groupService: GroupService,
@@ -32,7 +31,7 @@ export class WordsService {
       // check group not empty
       this.words = []; // clear current list words
       return this.http.get<Word[]>(
-        this.urlService.reqWordsOfGroupUrl(this.group), this.noAuthHeader
+        this.urlService.reqWordsOfGroupUrl(this.group)
       );
     }
   }
@@ -43,7 +42,7 @@ export class WordsService {
       // Check req group is not empty
       this.words = []; // clear current list words
       return this.http.get<Word[]>(
-        this.urlService.reqWordsOfGroupUrl(reqGroup), this.noAuthHeader
+        this.urlService.reqWordsOfGroupUrl(reqGroup)
       );
     } else {
       return of([]);
@@ -53,7 +52,7 @@ export class WordsService {
   /** Get list words from req list group */
   getWordsFromListGroup(reqListGroup: string[]): Observable<Word[]> {
     if (reqListGroup) {
-      return this.http.post<Word[]>(this.urlService.reqWordsOfListGroupUrl(), reqListGroup, this.noAuthHeader);
+      return this.http.post<Word[]>(this.urlService.reqWordsOfListGroupUrl(), reqListGroup);
     } else {
       return of([]);
     }
@@ -62,7 +61,7 @@ export class WordsService {
   /** Add new words */
   addWord(newWords: Word[]): Observable<string> {
     if (newWords) {
-      return this.http.post<string>(this.urlService.reqGroupUrl(), newWords, this.noAuthHeader);
+      return this.http.post<string>(this.urlService.reqGroupUrl(), newWords);
     } else {
       return of('');
     }
@@ -71,7 +70,7 @@ export class WordsService {
   /** Delete words */
   deleteWord(dltWords: Word[]): Observable<string> {
     if (dltWords) {
-      return this.http.post<string>(this.urlService.reqDeleteWordsUrl(), dltWords, this.noAuthHeader);
+      return this.http.post<string>(this.urlService.reqDeleteWordsUrl(), dltWords);
     } else {
       return of('');
     }
@@ -82,8 +81,7 @@ export class WordsService {
     if (oldName && newName) {
       return this.http.put<string>(
         this.urlService.reqRenameGroupUrl(oldName, newName),
-        {},
-        this.noAuthHeader
+        {}
       );
     } else {
       return of('');

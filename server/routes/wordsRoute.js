@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
+/**
+ *  >>>>> PRIVATE ROUTE <<<<<
+ */
+
+// Verify token funciton
+const jwtHelper = require('../config/jwtHelper');
+
 // Word Model
 const Word = require("../models/WordModel");
 
 // Get All group names (not duplicate)
-router.get("/", (req, res, next) => {
-  Word.find({})
+router.get("/", jwtHelper.verifyJwtToken, (req, res, next) => {
+  Word.find({ userName: req.userName })
     .select({ group: true, _id: false })
     .distinct("group")
     .exec((err, data) => {
@@ -20,8 +27,8 @@ router.get("/", (req, res, next) => {
 });
 
 // Get Word By Group
-router.get("/:group", (req, res, next) => {
-  Word.find({ group: req.params.group })
+router.get("/:group", jwtHelper.verifyJwtToken, (req, res, next) => {
+  Word.find({ userName: req.userName, group: req.params.group })
     .select({ _id: false, __v: false })
     .exec((err, data) => {
       if (err) {
@@ -34,8 +41,8 @@ router.get("/:group", (req, res, next) => {
 });
 
 // Get Word By List Group
-router.post("/listgroup", (req, res, next) => {
-  Word.find({group: req.body})
+router.post("/listgroup", jwtHelper.verifyJwtToken, (req, res, next) => {
+  Word.find({userName: req.userName, group: req.body})
     .select({ _id: false, __v: false })
     .exec((err, data) => {
       if (err) {
@@ -48,9 +55,10 @@ router.post("/listgroup", (req, res, next) => {
 });
 
 // Add Words
-router.post("/", (req, res, next) => {
+router.post("/", jwtHelper.verifyJwtToken, (req, res, next) => {
   req.body.forEach(eachBody => {
     var doc = new Word(eachBody);
+    doc.userName = req.userName;
     doc.save((err, data) => {
       if (err) {
         return res
@@ -63,9 +71,9 @@ router.post("/", (req, res, next) => {
 });
 
 // Delete Words
-router.post("/delete", (req, res, next) => {
+router.post("/delete", jwtHelper.verifyJwtToken, (req, res, next) => {
   req.body.forEach(eachBody => {
-    Word.findOneAndRemove({group: eachBody.group, word: eachBody.word, mean: eachBody.mean}).exec((err, data) => {
+    Word.findOneAndRemove({userName: req.userName, group: eachBody.group, word: eachBody.word, mean: eachBody.mean}).exec((err, data) => {
       if (err) {
         return res
           .status(500)
@@ -77,9 +85,9 @@ router.post("/delete", (req, res, next) => {
 });
 
 // Rename Group
-router.put("/renamegroup/:old/:new", (req, res, next) => {
+router.put("/renamegroup/:old/:new", jwtHelper.verifyJwtToken, (req, res, next) => {
   // find old group name in db
-  Word.find({ group: req.params.old }).exec((err, data) => {
+  Word.find({ userName: req.userName, group: req.params.old }).exec((err, data) => {
     if (err) {
       return res
         .status(500)

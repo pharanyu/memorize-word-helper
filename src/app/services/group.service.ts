@@ -14,7 +14,6 @@ export class GroupService {
   private groups: string[] = [];                            // store list of groups
   private activeGroup: string;                              // store current active group
   groupUpdated: EventEmitter<string> = new EventEmitter();  // store emitter for group changing
-  noAuthHeader = { headers: new HttpHeaders({ 'noauth': 'True' }) };
 
   constructor(
     private http: HttpClient,
@@ -22,7 +21,7 @@ export class GroupService {
 
   /** Get groups from Server */
   getGroups(): Observable<string[]> {
-    return this.http.get<string[]>(this.urlService.reqGroupUrl(), this.noAuthHeader);
+    return this.http.get<string[]>(this.urlService.reqGroupUrl());
   }
 
   /** Get current active group */
