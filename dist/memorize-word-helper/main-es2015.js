@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-sm navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/user\" routerLinkActive=\"active\">login</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-sm navbar-dark bg-dark shadow rounded\">\n  <a class=\"navbar-brand\" style=\"color: white; padding-right: 1rem;\">MemorizeWordHelper</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" >\n        <a class=\"nav-link\" routerLink=\"/random\" routerLinkActive=\"active\" >Random</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/manage\" routerLinkActive=\"active\">Manage</a>\n      </li>\n      <li *ngIf=\"!userService.isLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/user\" routerLinkActive=\"active\">login</a>\n      </li>\n      <li *ngIf=\"userService.isLoggedIn()\" class=\"nav-item\">\n        <a class=\"nav-link\" (click)=\"onLogout()\" routerLinkActive=\"active\">logout</a>\n      </li>\n    </ul>\n\n  </div>\n</nav>\n");
 
 /***/ }),
 
@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"serverErrorMessage\">\n  {{serverErrorMessage}}\n</div>\n\n<form #signInForm=\"ngForm\" (ngSubmit)=\"signInForm.valid && onSubmit(signInForm)\">\n\n  <div class=\"form-group\">\n    <label for=\"usernameID\">User Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"usernameID\" name=\"userName\" #userName=\"ngModel\"\n      [(ngModel)]=\"model.userName\" placeholder=\"Enter user name\" required>\n    <div *ngIf=\"signInForm.submitted && !userName.value\">\n      <small class=\"form-text text-danger\">User name is required.</small>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"passwordID\">Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"passwordID\" name=\"password\" #password=\"ngModel\"\n      [(ngModel)]=\"model.password\" placeholder=\"Enter password\" required minlength=\"6\">\n    <div *ngIf=\"signInForm.submitted && password.errors\">\n      <small *ngIf=\"password.errors.required\" class=\"form-text text-danger\">Password is required.</small>\n      <small *ngIf=\"password.errors.minlength\" class=\"form-text text-danger\">Password must be atleast 6\n        characters.</small>\n    </div>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary\">Log In</button>\n</form>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row justify-content-sm-center\">\n    <div class=\"col-sm-6\">\n      <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"serverErrorMessage\">\n        {{serverErrorMessage}}\n      </div>\n\n      <form #signInForm=\"ngForm\" (ngSubmit)=\"signInForm.valid && onSubmit(signInForm)\">\n\n        <div class=\"form-group\">\n          <label for=\"usernameID\">User Name</label>\n          <input type=\"text\" class=\"form-control\" id=\"usernameID\" name=\"userName\" #userName=\"ngModel\"\n            [(ngModel)]=\"model.userName\" placeholder=\"Enter user name\" required>\n          <div *ngIf=\"signInForm.submitted && !userName.value\">\n            <small class=\"form-text text-danger\">User name is required.</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"passwordID\">Password</label>\n          <input type=\"password\" class=\"form-control\" id=\"passwordID\" name=\"password\" #password=\"ngModel\"\n            [(ngModel)]=\"model.password\" placeholder=\"Enter password\" required minlength=\"6\">\n          <div *ngIf=\"signInForm.submitted && password.errors\">\n            <small *ngIf=\"password.errors.required\" class=\"form-text text-danger\">Password is required.</small>\n            <small *ngIf=\"password.errors.minlength\" class=\"form-text text-danger\">Password must be atleast 6\n              characters.</small>\n          </div>\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-primary\">Log In</button>\n      </form>\n      <br>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"alert alert-success\" role=\"alert\" *ngIf=\"showSuccessMessage\">\n  Sign Up successfully\n</div>\n\n<div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"serverErrorMessage\">\n  {{serverErrorMessage}}\n</div>\n\n<form #signUpForm=\"ngForm\" (ngSubmit)=\"signUpForm.valid && onSubmit(signUpForm)\">\n\n  <div class=\"form-group\">\n    <label for=\"userNameID\">User Name</label>\n    <input type=\"text\" class=\"form-control\" id=\"userNameID\" #userName=\"ngModel\"\n      [(ngModel)]=\"userService.selectedUser.userName\" name=\"userName\" placeholder=\"Create user name\">\n    <div *ngIf=\"signUpForm.submitted && !userName.value\">\n      <small class=\"form-text text-danger\">User name is required.</small>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"passwordID\">Password</label>\n    <input type=\"password\" class=\"form-control\" id=\"passwordID\" #password=\"ngModel\"\n      [(ngModel)]=\"userService.selectedUser.password\" name=\"password\" placeholder=\"Create password\" required\n      minlength=\"6\">\n    <div *ngIf=\"signUpForm.submitted && password.errors\">\n      <small *ngIf=\"password.errors.required\" class=\"form-text text-danger\">Password is required.</small>\n      <small *ngIf=\"password.errors.minlength\" class=\"form-text text-danger\">Password must be atleast 6\n        characters.</small>\n    </div>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary\">Sign Up</button>\n</form>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n  <div class=\"row justify-content-sm-center\">\n    <div class=\"col-sm-6\">\n      <div class=\"alert alert-success\" role=\"alert\" *ngIf=\"showSuccessMessage\">\n        Sign Up successfully\n      </div>\n\n      <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"serverErrorMessage\">\n        {{serverErrorMessage}}\n      </div>\n\n      <form #signUpForm=\"ngForm\" (ngSubmit)=\"signUpForm.valid && onSubmit(signUpForm)\">\n\n        <div class=\"form-group\">\n          <label for=\"userNameID\">User Name</label>\n          <input type=\"text\" class=\"form-control\" id=\"userNameID\" #userName=\"ngModel\"\n            [(ngModel)]=\"userService.selectedUser.userName\" name=\"userName\" placeholder=\"Create user name\">\n          <div *ngIf=\"signUpForm.submitted && !userName.value\">\n            <small class=\"form-text text-danger\">User name is required.</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"passwordID\">Password</label>\n          <input type=\"password\" class=\"form-control\" id=\"passwordID\" #password=\"ngModel\"\n            [(ngModel)]=\"userService.selectedUser.password\" name=\"password\" placeholder=\"Create password\" required\n            minlength=\"6\">\n          <div *ngIf=\"signUpForm.submitted && password.errors\">\n            <small *ngIf=\"password.errors.required\" class=\"form-text text-danger\">Password is required.</small>\n            <small *ngIf=\"password.errors.minlength\" class=\"form-text text-danger\">Password must be atleast 6\n              characters.</small>\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"ConfirmPasswordID\">Confirm password</label>\n          <input type=\"password\" class=\"form-control\" id=\"ConfirmPasswordID\" #confirmPassword=\"ngModel\" ngModel\n            name=\"confirmPassword\" placeholder=\"Please confirm password\" required>\n          <div *ngIf=\"signUpForm.submitted && !confirmPassword.value\">\n            <small class=\"form-text text-danger\">Confirm password is required.</small>\n          </div>\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-primary\">Sign Up</button>\n      </form>\n      <br>\n    </div>\n  </div>\n");
 
 /***/ }),
 
@@ -969,13 +969,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/user.service */ "./src/app/services/user.service.ts");
+
+
 
 
 let NavbarComponent = class NavbarComponent {
-    constructor() { }
+    constructor(userService, router) {
+        this.userService = userService;
+        this.router = router;
+    }
     ngOnInit() {
     }
+    onLogout() {
+        this.userService.deleteToken();
+        this.router.navigateByUrl('/user/login');
+    }
 };
+NavbarComponent.ctorParameters = () => [
+    { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
 NavbarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-navbar',
@@ -1213,18 +1228,27 @@ let SignUpComponent = class SignUpComponent {
     ngOnInit() {
     }
     onSubmit(form) {
-        this.userService.postUser(form.value).subscribe(res => {
-            this.showSuccessMessage = true;
-            setTimeout(() => this.showSuccessMessage = false, 4000);
-            this.resetForm(form);
-        }, err => {
-            if (err.status === 422) {
-                this.serverErrorMessage = err.error.join('<br>');
-            }
-            else {
-                this.serverErrorMessage = 'Sorry, Can\'t sign up cause something went wrong.';
-            }
-        });
+        if (form.value.password === form.value.confirmPassword) {
+            const createUser = {
+                userName: form.value.userName,
+                password: form.value.password
+            };
+            this.userService.postUser(createUser).subscribe(res => {
+                this.showSuccessMessage = true;
+                setTimeout(() => this.showSuccessMessage = false, 4000);
+                this.resetForm(form);
+            }, err => {
+                if (err.status === 422) {
+                    this.serverErrorMessage = err.error.join('<br>');
+                }
+                else {
+                    this.serverErrorMessage = 'Sorry, Can\'t sign up cause something went wrong.';
+                }
+            });
+        }
+        else {
+            this.serverErrorMessage = 'Please confirm your password again';
+        }
     }
     resetForm(form) {
         this.userService.selectedUser = {
@@ -1351,11 +1375,10 @@ let GroupService = class GroupService {
         this.urlService = urlService;
         this.groups = []; // store list of groups
         this.groupUpdated = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // store emitter for group changing
-        this.noAuthHeader = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'noauth': 'True' }) };
     }
     /** Get groups from Server */
     getGroups() {
-        return this.http.get(this.urlService.reqGroupUrl(), this.noAuthHeader);
+        return this.http.get(this.urlService.reqGroupUrl());
     }
     /** Get current active group */
     getActiveGroup() {
@@ -1457,9 +1480,6 @@ let UserService = class UserService {
     login(authCredentials) {
         return this.http.post('/api/user/authenticate', authCredentials, this.noAuthHeader);
     }
-    getUserProfile() {
-        return this.http.get('/api/user/userprofile');
-    }
     /** Other Methods */
     setToken(token) {
         localStorage.setItem('token', token);
@@ -1533,7 +1553,6 @@ let WordsService = class WordsService {
         this.urlService = urlService;
         this.words = []; // store list words of current group
         this.saveCompleteSignal = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"](); // Foremit when save complete
-        this.noAuthHeader = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({ 'noauth': 'True' }) };
     }
     /** Quary list words of current group from DataBase */
     getWordsFromActiveGroup() {
@@ -1542,7 +1561,7 @@ let WordsService = class WordsService {
         if (this.group) {
             // check group not empty
             this.words = []; // clear current list words
-            return this.http.get(this.urlService.reqWordsOfGroupUrl(this.group), this.noAuthHeader);
+            return this.http.get(this.urlService.reqWordsOfGroupUrl(this.group));
         }
     }
     /** Get list words from req group */
@@ -1550,7 +1569,7 @@ let WordsService = class WordsService {
         if (reqGroup) {
             // Check req group is not empty
             this.words = []; // clear current list words
-            return this.http.get(this.urlService.reqWordsOfGroupUrl(reqGroup), this.noAuthHeader);
+            return this.http.get(this.urlService.reqWordsOfGroupUrl(reqGroup));
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([]);
@@ -1559,7 +1578,7 @@ let WordsService = class WordsService {
     /** Get list words from req list group */
     getWordsFromListGroup(reqListGroup) {
         if (reqListGroup) {
-            return this.http.post(this.urlService.reqWordsOfListGroupUrl(), reqListGroup, this.noAuthHeader);
+            return this.http.post(this.urlService.reqWordsOfListGroupUrl(), reqListGroup);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([]);
@@ -1568,7 +1587,7 @@ let WordsService = class WordsService {
     /** Add new words */
     addWord(newWords) {
         if (newWords) {
-            return this.http.post(this.urlService.reqGroupUrl(), newWords, this.noAuthHeader);
+            return this.http.post(this.urlService.reqGroupUrl(), newWords);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])('');
@@ -1577,7 +1596,7 @@ let WordsService = class WordsService {
     /** Delete words */
     deleteWord(dltWords) {
         if (dltWords) {
-            return this.http.post(this.urlService.reqDeleteWordsUrl(), dltWords, this.noAuthHeader);
+            return this.http.post(this.urlService.reqDeleteWordsUrl(), dltWords);
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])('');
@@ -1586,7 +1605,7 @@ let WordsService = class WordsService {
     /** Rename group */
     renameGroup(oldName, newName) {
         if (oldName && newName) {
-            return this.http.put(this.urlService.reqRenameGroupUrl(oldName, newName), {}, this.noAuthHeader);
+            return this.http.put(this.urlService.reqRenameGroupUrl(oldName, newName), {});
         }
         else {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])('');
