@@ -25,10 +25,6 @@ export class UserService {
     return this.http.post('/api/user/authenticate', authCredentials, this.noAuthHeader);
   }
 
-  getUserProfile() {
-    return this.http.get('/api/user/userprofile');
-  }
-
   /** Other Methods */
 
   setToken(token: string) {

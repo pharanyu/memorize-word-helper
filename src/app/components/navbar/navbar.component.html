@@ -12,8 +12,11 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/manage" routerLinkActive="active">Manage</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="!userService.isLoggedIn()" class="nav-item">
         <a class="nav-link" routerLink="/user" routerLinkActive="active">login</a>
+      </li>
+      <li *ngIf="userService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" (click)="onLogout()" routerLinkActive="active">logout</a>
       </li>
     </ul>
 
